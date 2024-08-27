@@ -1,0 +1,15 @@
+steps: 
+  - name: 'node'   
+    entrypoint: 'npm'   
+    args: ['install']
+  - name: 'node'
+    entrypoint: 'npm'
+    args: ['run', 'build']      
+logsBucket: 'ardent-427704_cloudbuild'
+serviceAccount: 'projects/ardent-427704/serviceAccounts/ardent-service-account@ardent-427704.iam.gserviceaccount.com'
+options:  
+  logging: GCS_ONLY
+artifacts:    
+  npmPackages:    
+  - repository: 'us-central1-docker.pkg.dev/ardent-427704/ardent-webapp-repository'      
+    packagePath: 'PACKAGE_PATH'  
