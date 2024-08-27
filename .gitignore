@@ -12,7 +12,6 @@
 /build
 
 # media
-/public/videos
 
 # misc
 .DS_Store
