@@ -1,15 +1,11 @@
-steps: 
-  - name: 'node'   
-    entrypoint: 'npm'   
-    args: ['install']
-  - name: 'node'
-    entrypoint: 'npm'
-    args: ['run', 'build']      
+steps:
+    - name: 'gcr.io/cloud-builders/docker'
+      args: ['build', '-t', 'us-central1-docker.pkg.dev/ardent-427704/ardent-webapp-repository/ardent-web-app', '.']
+    - name: 'gcr.io/cloud-builders/docker'
+      args: ['push', 'us-central1-docker.pkg.dev/ardent-427704/ardent-webapp-repository/ardent-web-app']
+    - name: 'gcr.io/cloud-builders/gcloud'
+      args: ['run', 'deploy', 'ardent-webapp', '--image', 'us-central1-docker.pkg.dev/ardent-427704/ardent-webapp-repository/ardent-web-app', '--platform=managed', '--region=us-central1']
 logsBucket: 'ardent-427704_cloudbuild'
 serviceAccount: 'projects/ardent-427704/serviceAccounts/ardent-service-account@ardent-427704.iam.gserviceaccount.com'
 options:  
-  logging: GCS_ONLY
-artifacts:    
-  npmPackages:    
-  - repository: 'us-central1-docker.pkg.dev/ardent-427704/ardent-webapp-repository'      
-    packagePath: 'PACKAGE_PATH'  
+  logging: GCS_ONLY           
