@@ -17,11 +17,11 @@
             "type": "node"
         },
         {
-            "name": "Launch Chrome",
+            "name": "Debug Ardept App",
             "request": "launch",
             "type": "chrome",
-            "url": "http://localhost",
-            "webRoot": "${workspaceFolder}"
+            "url": "http://localhost:3000",
+            "webRoot": "${workspaceFolder}/src"
         }
     ]
 }
