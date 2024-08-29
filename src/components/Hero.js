@@ -1,6 +1,6 @@
 import React from 'react';
 import '../App.css';
-import { Button } from './Button';
+import { TrySearchButton } from './TrySearchButton';
 import './Hero.css';
 
 function Hero() {
@@ -10,13 +10,13 @@ function Hero() {
       <h2>ARDENT finds Answers</h2>
       <p>Get the latest research and clinical trials information on any Rare Disease</p>
       <div className='hero-btns'>
-        <Button
+        <TrySearchButton
           className='btns'
           buttonStyle='btn--primary'
           buttonSize='btn--large'
         >
           Try a Search!
-        </Button>
+        </TrySearchButton>
       </div>
     </div>
   );
