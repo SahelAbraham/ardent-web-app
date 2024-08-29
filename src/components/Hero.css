@@ -40,6 +40,26 @@ video {
     'Lucida Sans', Arial, sans-serif;
 }
 
+.hero-container-search {
+  /* background: url('/images/img-home.jpg') center center/cover no-repeat; */
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-shadow: inset 0 0 0 1000px rgba(222, 214, 214, 0.2);
+  object-fit: contain;
+  z-index: -1;
+}
+
+.hero-container-search > p {
+  margin-top: 8px;
+  color: #fff;
+  font-size: 32px;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande',
+    'Lucida Sans', Arial, sans-serif;
+}
+
 .hero-btns {
   margin-top: 32px;
 }
