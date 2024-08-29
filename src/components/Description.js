@@ -6,8 +6,8 @@ function Description() {
     <div className='background'>
       <div className='description-container'>
         <h1>About Us</h1>
-        <h2>Built by Sahel, Chris, and Mikayla Abraham, ARDENT is an AI powered chatbot made for getting
-          new information and clinical trials relating to rare diseases.
+        <h2>Built by Sahel, Chris, and Mikayla Abraham, ARDENT is an AI powered system for getting
+          the latest information and clinical trials related to rare diseases.
         </h2>
         <h2> </h2>
         <h2>Rare diseases are defined as illnesses with under 200,000 cases in the United States, but due to the low amount
