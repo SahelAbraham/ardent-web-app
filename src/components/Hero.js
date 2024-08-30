@@ -45,9 +45,13 @@ function Hero() {
         query: queryStr.textarea,
         llm: "string"
       }
-      axios.post('https://jsonplaceholder.typicode.com/posts', data)
+      const headers = {
+        "Content-Type": "application/json",
+      };
+      axios.post('http://35.193.161.194:2000/services/pubmed_abstracts/', data, {headers})
       .then(response => {
         console.log(response.data);
+        setResponse(response.data)
       })
       .catch(error => {
         console.log(error);
