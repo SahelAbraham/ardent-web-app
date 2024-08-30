@@ -7,6 +7,7 @@ import { Form, ButtonToolbar, Input } from 'rsuite';
 import { FlexboxGrid, Divider } from 'rsuite';
 import { SchemaModel, StringType } from "schema-typed"
 import 'rsuite/dist/rsuite.min.css'
+import axios from 'axios';
 
 function Hero() {
   const [open, setOpen] = React.useState(false);
@@ -37,29 +38,56 @@ function Hero() {
       return
     }
     try {
-      await fetch(`http://35.193.161.194:2000/services/pubmed_abstracts/`,
-        {
-          method: 'POST',
-          mode: 'no-cors',          
-          headers: new Headers({
-            'Content-Type': 'application/json'
-          }),
-          body: JSON.stringify({
-            name: "string",
-            description: 'string',
-            prompt: hardPrompt,
-            query: queryStr.textarea,
-            llm: 'string',
-        })
-       }).then(resp => resp.json())
-          .then(data => { setResponse(JSON.stringify(data).replaceAll('\",\"success\":true', '')
-          .replaceAll('\"results\":\"','') .replaceAll('\\n', '\n').slice(1,-1)) })
-          .catch(err => { console.log(err) }); 
-          setIsLoading(false)      
+      let data = {
+        name: "string",
+        description: "string",
+        prompt: hardPrompt,
+        query: queryStr.textarea,
+        llm: "string"
+      }
+      axios.post('https://jsonplaceholder.typicode.com/posts', data)
+      .then(response => {
+        console.log(response.data);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+      setIsLoading(false)      
     } catch (error) {
       console.log('An error occurred while fetching search results', error)
     }    
-    };
+  };
+
+  // const fetchSearchResults = async () => {
+  //   if (!formRef.current.check()) { 
+  //     console.error("Form error") 
+  //     return
+  //   }
+  //   try {
+  //     // await fetch(`http://35.193.161.194:2000/services/pubmed_abstracts/`,
+  //     await fetch(`http://127.0.0.1:2000/services/pubmed_abstracts/`,
+  //       {
+  //         method: "POST",
+  //         // mode: 'no-cors',          
+  //         headers: new Headers({
+  //           "Content-Type": "application/json"
+  //         }),
+  //         body: JSON.stringify({
+  //           name: "string",
+  //           description: "string",
+  //           prompt: hardPrompt,
+  //           query: queryStr.textarea,
+  //           llm: "string"
+  //       })
+  //      }).then(resp => resp.json())
+  //     .then(data => { setResponse(JSON.stringify(data).replaceAll('\",\"success\":true', '')
+  //         .replaceAll('\"results\":\"','') .replaceAll('\\n', '\n').slice(1,-1)) })
+  //         .catch(err => { console.log(err) }); 
+  //         setIsLoading(false)      
+  //   } catch (error) {
+  //     console.log('An error occurred while fetching search results', error)
+  //   }    
+  //   };
 
   return (
     <div>
