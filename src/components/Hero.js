@@ -3,11 +3,8 @@ import '../App.css';
 import { TrySearchButton } from './TrySearchButton';
 import './Hero.css';
 import { Drawer, Button, Placeholder, Col } from 'rsuite';
-import { Form, ButtonToolbar, Input } from 'rsuite';
-import { FlexboxGrid, Divider } from 'rsuite';
-import { SchemaModel, StringType } from "schema-typed"
 import 'rsuite/dist/rsuite.min.css'
-import axios from 'axios';
+import GenericSearch from './search/GenericSearch';
 
 function Hero() {
   const [open, setOpen] = React.useState(false);
@@ -17,50 +14,12 @@ function Hero() {
   const formRef = React.useRef()
   // const Textarea = React.forwardRef((props, ref) => <Input {...props} as="textarea" ref={ref}/>);
 
-  const hardPrompt = 'You\'re an expert health care researcher who wants to obtain a summarized information about a disease and any progress that has been made. Don\'t make up any details or hallucinate information. Your response should be in two paragraphs or less'
-  const [response, setResponse] = useState('');
-  const [isLoading, setIsLoading] = useState(true);
-
-  const model = SchemaModel({ 
-    textarea: StringType() 
-        .isRequired("Enter search query here") 
-        .maxLength(100) 
-  })
-
   const handleOpen = key => {
     setOpen(true);
     setPlacement(key);
   };
 
-  const fetchSearchResults = async () => {
-    if (!formRef.current.check()) { 
-      console.error("Form error") 
-      return
-    }
-    try {
-      let data = {
-        name: "string",
-        description: "string",
-        prompt: hardPrompt,
-        query: queryStr.textarea,
-        llm: "string"
-      }
-      const headers = {
-        "Content-Type": "application/json",
-      };
-      axios.post('http://35.193.161.194:2000/services/pubmed_abstracts/', data, {headers})
-      .then(response => {
-        console.log(response.data);
-        setResponse(response.data)
-      })
-      .catch(error => {
-        console.log(error);
-      });
-      setIsLoading(false)      
-    } catch (error) {
-      console.log('An error occurred while fetching search results', error)
-    }    
-  };
+
 
   // const fetchSearchResults = async () => {
   //   if (!formRef.current.check()) { 
@@ -114,37 +73,13 @@ function Hero() {
       <div className='hero-container-search'>
           <Drawer size='md' placement={placement} open={open} onClose={() => setOpen(false)}>
             <Drawer.Header>
-              <Drawer.Title>Search latest information about Rare Dieases</Drawer.Title>
+              <Drawer.Title>Rare Dieases Search</Drawer.Title>
               <Drawer.Actions>
                 <Button onClick={() => setOpen(false)}>Cancel</Button>  
               </Drawer.Actions>
             </Drawer.Header>
             <Drawer.Body>
-              <div>
-                <Form ref={formRef} 
-                model={model} 
-                onChange={setQueryStr} 
-                onSubmit={fetchSearchResults} 
-                fluid>
-                  <FlexboxGrid justify="center">
-                    <FlexboxGrid.Item as={Col} colspan={24} md={6}></FlexboxGrid.Item>
-                    <FlexboxGrid.Item as={Col} colspan={24} md={6}>
-                      <Form.Group controlId="textarea">
-                        <Form.ControlLabel>Enter your question:</Form.ControlLabel>
-                        <Form.Control rows={5} name="textarea"/>
-                      </Form.Group>
-                    </FlexboxGrid.Item>
-                    <FlexboxGrid.Item as={Col} colspan={24} md={6}></FlexboxGrid.Item>
-                  </FlexboxGrid>
-                  <FlexboxGrid justify="center">
-                    <ButtonToolbar>
-                      <FlexboxGrid.Item as={Col} colspan={24} md={6}>
-                        <Button appearance="primary" type="submit">Search</Button>
-                      </FlexboxGrid.Item>
-                    </ButtonToolbar>                
-                  </FlexboxGrid>                
-                </Form>
-                </div>
+              <GenericSearch/>
             </Drawer.Body>
           </Drawer>
       </div>
