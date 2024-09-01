@@ -65,16 +65,15 @@ function GenericSearch(){
             if(parseInt(response.status)==200)
                 dispatch(addSearchResult({"question": queryStr.textarea, "answer": response.data.results}))
             else
-                dispatch(addSearchResult({"question": queryStr.textarea, "answer": 'No answer retrieved'}))
-            // setResponse(response.data)
+                dispatch(addSearchResult({"question": queryStr.textarea, "answer": 'No answer retrieved'}))            
+            setIsLoading(false)
           })
           .catch(error => {
             console.log(error);
           });
         } catch (error) {
           console.log('An error occurred while fetching search results', error)
-        }
-        setIsLoading(false)
+        }        
       };
 
     return (
@@ -111,7 +110,8 @@ function GenericSearch(){
                         <div>
                             <PanelGroup accordion bordered>
                                 {searchResultsDisplay.map(function(object, i){
-                                    return <Panel header={object.question} key={i}><p>{object.answer}</p></Panel>;
+                                    return isLoading ? <Panel header={object.question} key={i}><Placeholder.Paragraph/></Panel> : 
+                                    <Panel header={object.question} key={i}><p>{object.answer}</p></Panel>
                                 })}
                             </PanelGroup>
                         </div>}
