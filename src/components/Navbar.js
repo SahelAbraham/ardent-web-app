@@ -41,7 +41,7 @@ function Navbar() {
                 </Link>
               </li>
               <li className='nav-item'>
-                <Link to='/chat' className='nav-links' onClick={closeMobileMenu}>
+                <Link to='/workspace' className='nav-links' onClick={closeMobileMenu}>
                   Try it Out
                 </Link>
               </li>
@@ -50,6 +50,11 @@ function Navbar() {
                   About
                 </Link>
               </li>
+              <li className='nav-item'>
+                <Link to='/signin' className='nav-links' onClick={closeMobileMenu}>
+                  Sign Up/In
+                </Link>
+              </li>              
             </ul>
             {button && <TrySearchButton buttonStyle='btn--outline'> Get the App! </TrySearchButton>}
         </div>

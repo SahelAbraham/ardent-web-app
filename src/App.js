@@ -3,7 +3,7 @@ import Navbar from './components/Navbar';
 import { BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 import Home from './components/tabs/Home'
 import About from './components/tabs/About';
-import Chat from './components/tabs/Chat';
+import SearchWorkspace from './components/tabs/SearchWorkspace';
 
 
 function App() {
@@ -14,7 +14,8 @@ function App() {
         <Routes>
           <Route path='/' exact element={<Home/>}/>
           <Route path='/about' exact element={<About/>}/>
-          <Route path='/chat' exact element={<Chat/>}/>
+          <Route path='/workspace' exact element={<SearchWorkspace/>}/>
+          <Route path='/signin' exact element={<SearchWorkspace/>}/>
         </Routes>
       </Router>
     </>    
