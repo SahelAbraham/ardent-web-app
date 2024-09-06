@@ -79,34 +79,30 @@ function GenericSearch(){
 
     return (
         <div>
-            <FlexboxGrid justify="space-between">
-                <FlexboxGrid.Item as={Col} colspan={8}>                        
-                    <FlexboxGrid justify="space-between">
+            <FlexboxGrid>
+                <FlexboxGrid.Item as={Col} colspan={10}>
+                    <Panel header="Enter your question:" bordered shaded>
                         <Form ref={formRef} 
-                            model={model} 
-                            onChange={setQueryStr} 
-                            onSubmit={fetchSearchResults}>
-                            <div className='generic-workspace-parent'>
+                                model={model} 
+                                onChange={setQueryStr} 
+                                onSubmit={fetchSearchResults}>
+                            <div style={{"margin-bottom" : "30px"}}>
                                 <Form.Group controlId="textarea">
-                                    <Form.ControlLabel>Enter your question:</Form.ControlLabel>
-                                    {/* <div className='generic-workspace-child'> */}
-                                        <FlexboxGrid.Item as={Col} colspan={16}>
-                                            <Form.Control rows={5} name="textarea"/>
-                                        </FlexboxGrid.Item>
-                                    {/* </div> */}
-                                    {/* <div className='generic-workspace-child'> */}
-                                        <FlexboxGrid.Item as={Col} colspan={4}>
-                                            <ButtonToolbar>
-                                                <Button appearance="primary" type="submit">Search</Button>
-                                            </ButtonToolbar>
-                                        </FlexboxGrid.Item>
-                                    {/* </div> */}
+                                    <FlexboxGrid.Item as={Col} colspan={16}>
+                                        <Form.Control rows={5} name="textarea"/>
+                                    </FlexboxGrid.Item>
+                                    <FlexboxGrid.Item as={Col} colspan={4}>
+                                        <ButtonToolbar>
+                                            <Button appearance="primary" type="submit">Search</Button>
+                                        </ButtonToolbar>
+                                        <br/>
+                                    </FlexboxGrid.Item>
                                 </Form.Group>
                             </div>
                         </Form>
-                    </FlexboxGrid>
+                    </Panel>                    
                 </FlexboxGrid.Item>
-                <FlexboxGrid.Item as={Col} colspan={10}>
+                <FlexboxGrid.Item as={Col} colspan={12}>
                     <Panel header="Search Results" shaded>
                         {isLoading ? 
                         <div>

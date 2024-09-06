@@ -120,6 +120,7 @@
   margin: 1rem;
   padding: 2rem 2rem;
   text-align: left;
+  float: left;
 }
 .generic-workspace-child {
   display: inline-block;  
