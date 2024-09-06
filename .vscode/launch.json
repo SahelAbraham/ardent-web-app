@@ -17,7 +17,7 @@
             "type": "node"
         },
         {
-            "name": "Debug Ardept App",
+            "name": "Debug Ardent App",
             "request": "launch",
             "runtimeArgs": ["--disable-web-security"],
             "type": "chrome",
