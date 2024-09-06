@@ -2,6 +2,10 @@ import {React, useState, useEffect} from 'react'
 import {Link} from 'react-router-dom'
 import {TrySearchButton} from './TrySearchButton'
 import './Navbar.css'
+import Login from './login/Login'
+import MobileApp from './mobileApp/MobileApp'
+
+import { Button, ButtonToolbar } from 'rsuite';
 
 function Navbar() {
   const [click, setClick] = useState(false)
@@ -51,12 +55,17 @@ function Navbar() {
                 </Link>
               </li>
               <li className='nav-item'>
-                <Link to='/signin' className='nav-links' onClick={closeMobileMenu}>
-                  Sign Up/In
-                </Link>
-              </li>              
+                <div className='nav-links'>
+                  <Login/>
+                </div>                
+              </li> 
+              {/* <li className='nav-item'>
+                <div className='nav-links'>
+                  <MobileApp/>
+                </div>                
+              </li>*/}            
             </ul>
-            {button && <TrySearchButton buttonStyle='btn--outline'> Get the App! </TrySearchButton>}
+            {button && <TrySearchButton buttonStyle='btn--outline'>Get the App!</TrySearchButton>}
         </div>
       </nav>
     </>

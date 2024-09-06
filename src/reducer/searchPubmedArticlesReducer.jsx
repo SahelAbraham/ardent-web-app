@@ -6,7 +6,7 @@ const initialState = {
       },
 }
 
-export const searchPubmedArticlesResultsSlice = createSlice({
+export const SearchPubmedArticlesResultsSlice = createSlice({
   name: 'searchPubmedResults',
   initialState,
   reducers: {
@@ -20,6 +20,6 @@ export const searchPubmedArticlesResultsSlice = createSlice({
 })
 
 // Action creators are generated for each case reducer function
-export const { addSearchResult, resetSearchResult } = searchPubmedArticlesResultsSlice.actions
+export const { addSearchResult, resetSearchResult } = SearchPubmedArticlesResultsSlice.actions
 
-export default searchPubmedArticlesResultsSlice.reducer
+export default SearchPubmedArticlesResultsSlice.reducer

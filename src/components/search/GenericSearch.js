@@ -4,7 +4,7 @@ import { Form, ButtonToolbar, FlexboxGrid, PanelGroup, Panel, Placeholder } from
 import { SchemaModel, StringType } from "schema-typed"
 import axios from 'axios';
 import { useSelector, useDispatch } from 'react-redux'
-import { addSearchResult, resetSearchResult } from "../../reducer/searchPubmedArticlesReducer"
+import { addSearchResult, resetSearchResult } from "../../reducer/SearchPubmedArticlesReducer"
 
 function GenericSearch(){
     // const [open, setOpen] = React.useState(false);
@@ -49,31 +49,32 @@ function GenericSearch(){
           return
         }
         try {
-          let data = {
-            name: "string",
-            description: "string",
-            prompt: hardPrompt,
-            query: queryStr.textarea,
-            llm: "string"
-          }
-          const headers = {
-            "Content-Type": "application/json",
-          };
-          axios.post('http://35.193.161.194:2000/services/pubmed_abstracts/', data, {headers})
-          .then(response => {
-            console.log(response.data);
-            if(parseInt(response.status)==200)
-                dispatch(addSearchResult({"question": queryStr.textarea, "answer": response.data.results}))
-            else
-                dispatch(addSearchResult({"question": queryStr.textarea, "answer": 'No answer retrieved'}))            
-            setIsLoading(false)
-          })
-          .catch(error => {
-            console.log(error);
-          });
-        } catch (error) {
-          console.log('An error occurred while fetching search results', error)
-        }        
+            let ARDENT_WEB_APP_URL = process.env.REACT_APP_ARDENT_WEB_APP_URL
+            let data = {
+                name: "string",
+                description: "string",
+                prompt: hardPrompt,
+                query: queryStr.textarea,
+                llm: "string"
+            }
+            const headers = {
+                "Content-Type": "application/json",
+            };
+            axios.post(ARDENT_WEB_APP_URL + '/services/pubmed_abstracts/', data, {headers})
+            .then(response => {
+                console.log(response.data);
+                if(parseInt(response.status)==200)
+                    dispatch(addSearchResult({"question": queryStr.textarea, "answer": response.data.results}))
+                else
+                    dispatch(addSearchResult({"question": queryStr.textarea, "answer": 'No answer retrieved'}))            
+                setIsLoading(false)
+            })
+            .catch(error => {
+                console.log(error);
+            });
+            } catch (error) {
+            console.log('An error occurred while fetching search results', error)
+            }        
       };
 
     return (
@@ -85,17 +86,23 @@ function GenericSearch(){
                             model={model} 
                             onChange={setQueryStr} 
                             onSubmit={fetchSearchResults}>
-                            <Form.Group controlId="textarea">
-                                <Form.ControlLabel>Enter your question:</Form.ControlLabel>
-                                <FlexboxGrid.Item as={Col} colspan={16}>
-                                    <Form.Control rows={5} name="textarea"/>
-                                </FlexboxGrid.Item>
-                                <FlexboxGrid.Item as={Col} colspan={4}>
-                                    <ButtonToolbar>
-                                        <Button appearance="primary" type="submit">Search</Button>
-                                    </ButtonToolbar>
-                                </FlexboxGrid.Item>
-                            </Form.Group>
+                            <div className='generic-workspace-parent'>
+                                <Form.Group controlId="textarea">
+                                    <Form.ControlLabel>Enter your question:</Form.ControlLabel>
+                                    {/* <div className='generic-workspace-child'> */}
+                                        <FlexboxGrid.Item as={Col} colspan={16}>
+                                            <Form.Control rows={5} name="textarea"/>
+                                        </FlexboxGrid.Item>
+                                    {/* </div> */}
+                                    {/* <div className='generic-workspace-child'> */}
+                                        <FlexboxGrid.Item as={Col} colspan={4}>
+                                            <ButtonToolbar>
+                                                <Button appearance="primary" type="submit">Search</Button>
+                                            </ButtonToolbar>
+                                        </FlexboxGrid.Item>
+                                    {/* </div> */}
+                                </Form.Group>
+                            </div>
                         </Form>
                     </FlexboxGrid>
                 </FlexboxGrid.Item>
