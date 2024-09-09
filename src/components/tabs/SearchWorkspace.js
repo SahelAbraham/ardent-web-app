@@ -108,7 +108,8 @@ export default function SearchWorkspace() {
             </div>
           </Sidebar>
           <Content>
-            <Panel header="Clinical Trials for Rare Diseases" bordered shaded>
+            <h4>Clinical Trials for Rare Diseases</h4>
+            <Panel header="Active Clinical trials are in process for finding cures for Rare Diseases. " bordered shaded>
               <GenericClinicalTrialsSearch/>
               <Panel header="Clinical Trials information (Recruiting only)" shaded>
                 {isLoading ? 

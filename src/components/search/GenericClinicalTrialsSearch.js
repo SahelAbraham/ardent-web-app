@@ -75,9 +75,8 @@ function GenericClinicalTrialsSearch({timelineData, timelineNodeIconArray}){
 
         //check if the search has to be executed. The question to be used is in resolvedQuestion
         let executeSearchFlag = true
-        if(searchCTDiseaseResultsDisplay.some((item, resolvedQuestion) => item.question === resolvedQuestion)){
+        if(searchCTDiseaseResultsDisplay.some((item) => item.question === resolvedQuestion))
           executeSearchFlag = false
-        }
 
         if(executeSearchFlag){
           if (process.env.REACT_APP_USE_MOCK_DATA){
@@ -125,7 +124,7 @@ function GenericClinicalTrialsSearch({timelineData, timelineNodeIconArray}){
         else{
           toaster.push(
             <Notification type="warning" header="Search already executed" closable>
-              The search: {resolvedQuestion} has already been executed. Please review the results!!
+              Search: <i>{resolvedQuestion}</i> has already been executed. Please review the results!!
             </Notification>,
             {label: 'topEndbottomEnd', value: 'bottomEnd'})
         }
