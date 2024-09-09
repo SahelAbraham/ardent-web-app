@@ -22,7 +22,8 @@
             "runtimeArgs": ["--disable-web-security"],
             "type": "chrome",
             "url": "http://localhost:3000",
-            "webRoot": "${workspaceFolder}/src"
+            "webRoot": "${workspaceFolder}/src",
+            "sourceMaps": true
         }
     ]
 }

@@ -4,22 +4,31 @@ const initialState = {
     clinicalTrialSearchResults: {
         items: [],
       },
+    clinicalTrialDetails : {
+      items: [],
+    }
 }
 
 export const SearchClinicalTrialsResultsSlice = createSlice({
-  name: 'searchPubmedResults',
+  name: 'searchClinicalTrials',
   initialState,
   reducers: {
     addClinicalTrialSearchResult: (state, action) => {
-        state.searchResults.items = [...state.searchResults.items, action.payload];
+      state.clinicalTrialSearchResults.items = [...state.clinicalTrialSearchResults.items, action.payload];
     },
     resetClinicalTrialSearchResult: (state, action) => {
-      state.searchResults.items = [];
-  }
+      state.clinicalTrialSearchResults.items = [];
+    },
+    addClinicalTrialDetails: (state, action) => {
+      state.clinicalTrialDetails.items = [...state.clinicalTrialDetails.items, action.payload];
+    },
+    resetClinicalTrialDetails: (state, action) => {
+      state.clinicalTrialDetails.items = [];
+}
   },
 })
 
 // Action creators are generated for each case reducer function
-export const { addClinicalTrialSearchResult, resetClinicalTrialSearchResult } = SearchClinicalTrialsResultsSlice.actions
+export const { addClinicalTrialSearchResult, resetClinicalTrialSearchResult, addClinicalTrialDetails,  resetClinicalTrialDetails} = SearchClinicalTrialsResultsSlice.actions
 
 export default SearchClinicalTrialsResultsSlice.reducer
