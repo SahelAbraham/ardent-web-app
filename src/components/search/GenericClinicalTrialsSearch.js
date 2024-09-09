@@ -75,7 +75,7 @@ function GenericClinicalTrialsSearch({timelineData, timelineNodeIconArray}){
 
         //check if the search has to be executed. The question to be used is in resolvedQuestion
         let executeSearchFlag = true
-        if(searchCTDiseaseResultsDisplay.some((item) => item.question === resolvedQuestion))
+        if(searchCTDiseaseResultsDisplay.some((item) => item.question.toLowerCase() === resolvedQuestion.toLowerCase()))
           executeSearchFlag = false
 
         if(executeSearchFlag){
