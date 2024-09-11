@@ -125,8 +125,15 @@ export default function SearchWorkspace() {
             </div>
 
             <div>
-              <h4>Clinical Trials for Rare Diseases</h4>
-              <Panel header="Search for Active Clinical trials are in process for finding cures for Rare Diseases. " bordered shaded>
+              <div className='description-container'>
+                <h4>Clinical Trials for Rare Diseases</h4>
+                <p>Clinical trials are research studies that test new medical interventions or make observations on people to determine if they are safe and effective. They are a key part of medical advances 
+                  and are used to develop new ways to prevent, detect, or treat disease</p>
+                <p>Clinical trials follow a carefully designed plan that includes the tests, procedures, treatments, and eligibility requirements. The protocol also describes the study's goals, expected duration, and protections for participants. 
+                  Studying rare diseases is challenging. Participant pools are small and restricted by rigid inclusion and exclusion criteria. There is often incomplete understanding of genotype–phenotype relationships. The below search will retrieved
+                  clinical trials for your particular rare disease</p>
+              </div>
+              <Panel header="Search for clinical trials that are recruiting for finding cures to Rare Diseases. " shaded>
                 <GenericClinicalTrialsSearch/>
                 <Panel header="Clinical Trials information (Recruiting only)" shaded>
                   {isLoading ? 

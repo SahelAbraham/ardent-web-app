@@ -126,3 +126,10 @@
   /* padding: 1rem 1rem; */
   vertical-align: middle;
 }
+
+.rs-col {
+  float: left;
+  position: relative;
+  min-height: 1px;
+  padding-right: 5px;
+}
