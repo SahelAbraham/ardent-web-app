@@ -71,7 +71,7 @@ function Hero() {
         </div>
       </div>
       <div className='hero-container-search'>
-          <Drawer size='md' placement={placement} open={open} onClose={() => setOpen(false)}>
+          <Drawer size='sm' placement={placement} open={open} onClose={() => setOpen(false)}>
             <Drawer.Header>
               <Drawer.Title>Rare Dieases Search</Drawer.Title>
               <Drawer.Actions>

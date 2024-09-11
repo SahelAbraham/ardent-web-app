@@ -14,6 +14,7 @@ function GenericSearch(){
     const hardPrompt = 'You\'re an expert health care researcher who wants to obtain a summarized information about a disease and any progress that has been made. Don\'t make up any details or hallucinate information. Your response should be in two paragraphs or less'
     
     const [isLoading, setIsLoading] = useState(false);
+    const [isLoaded, setIsLoaded] = useState(false);
     const searchResults = useSelector((state) => state.searchPubmedArticles.searchResults.items)
     const [searchResultsDisplay, setSearchResultsDisplay] = React.useState([]);
     const dispatch = useDispatch()
@@ -43,6 +44,7 @@ function GenericSearch(){
     }
   
     const fetchSearchResults = async () => {
+        setIsLoaded(false)
         setIsLoading(true)
         if (!formRef.current.check()) { 
           console.error("Form error") 
@@ -68,25 +70,27 @@ function GenericSearch(){
                 else
                     dispatch(addSearchResult({"question": queryStr.textarea, "answer": 'No answer retrieved'}))            
                 setIsLoading(false)
+                setIsLoaded(true)
             })
             .catch(error => {
                 console.log(error);
             });
             } catch (error) {
-            console.log('An error occurred while fetching search results', error)
-            }        
+                console.log('An error occurred while fetching search results', error)
+            }
+            setIsLoaded(true)
       };
 
     return (
         <div>
             <FlexboxGrid>
-                <FlexboxGrid.Item as={Col} colspan={10}>
+                <FlexboxGrid.Item className='search-container' as={Col} colspan={10}>
                     <Panel header="Enter your question:" bordered shaded>
                         <Form ref={formRef} 
                                 model={model} 
                                 onChange={setQueryStr} 
                                 onSubmit={fetchSearchResults}>
-                            <div style={{"margin-bottom" : "30px"}}>
+                            <div style={{"margin-bottom" : "20px"}}>
                                 <Form.Group controlId="textarea">
                                     <FlexboxGrid.Item as={Col} colspan={16}>
                                         <Form.Control rows={5} name="textarea"/>
@@ -102,14 +106,14 @@ function GenericSearch(){
                         </Form>
                     </Panel>                    
                 </FlexboxGrid.Item>
-                <FlexboxGrid.Item as={Col} colspan={12}>
+                <FlexboxGrid.Item className='search-container' as={Col} colspan={12}>
                     <Panel header="Search Results" shaded>
                         {isLoading ? 
                         <div>
                             <Placeholder.Paragraph graph="circle" active />
                             <Loader center content="Retrieving answer..." />
                         </div> 
-                        : 
+                        : (isLoaded ?
                         <div>
                             <PanelGroup accordion bordered>
                                 {searchResultsDisplay.map(function(object, i){
@@ -117,7 +121,10 @@ function GenericSearch(){
                                     <Panel header={object.question} key={i}><p>{object.answer}</p></Panel>
                                 })}
                             </PanelGroup>
-                        </div>}
+                        </div> : 
+                        <div>
+                            <Placeholder.Paragraph graph="circle" />
+                        </div>)}
                     </Panel>
                 </FlexboxGrid.Item>
             </FlexboxGrid>

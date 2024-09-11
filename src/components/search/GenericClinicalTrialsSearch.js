@@ -171,7 +171,7 @@ function GenericClinicalTrialsSearch({timelineData, timelineNodeIconArray}){
                   <div class='search-workspace-ct-child'>or</div>
                   <div class='search-workspace-ct-child'>
                     <Form.Group name="rdTextDiseaseEntry" controlId="rdTextDiseaseEntry">
-                      <InlineEdit name="rdTextDiseaseEntry" placeholder="Type a rare disease..." style={{ width: 150 }} 
+                      <InlineEdit name="rdTextDiseaseEntry" placeholder="Type a rare disease..." style={{ width: 300 }} 
                         onChange={(val, evt)=>{
                           handleClinicalTrialsSearchWorkspaceChange(val, evt)
                         }}                      
