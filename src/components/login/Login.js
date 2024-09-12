@@ -1,11 +1,11 @@
 import '../../App.css'
-import { Modal, Button, Loader, Panel, PanelGroup, FlexboxGrid, ButtonToolbar, Col, Form, Notification } from 'rsuite';
+import { Modal, Button, Loader, Panel, PanelGroup, FlexboxGrid, ButtonToolbar, Col, Form, Notification, useToaster } from 'rsuite';
 import React, {useEffect, useState} from 'react';
 import { SchemaModel, StringType } from "schema-typed"
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, sendPasswordResetEmail } from "firebase/auth";
 import { useDispatch } from 'react-redux'
 import { setNotifcation, resetNotification } from "../../reducer/NotificationReducer"
 
@@ -42,7 +42,8 @@ function Login() {
         signin_password: ""
     }) 
     const signInFormRef = React.useRef() 
-  
+    const toaster = useToaster();
+
     // Model using schema model to validate 
     // the data taken in the form 
     const signInModel = SchemaModel({         
@@ -52,7 +53,33 @@ function Login() {
         signin_password: StringType() 
             .isRequired("Enter password") 
 
-    }) 
+    })
+
+    const updateSignInFormValues = (val, evt) => {
+        const { id, value } = evt.target;
+
+        setSignInFormValue(prevState => ({
+            ...prevState,
+            [id] : value
+        }))
+    }
+
+    const resetPassword = (e, signin_email) => {
+        const auth = getAuth();
+        sendPasswordResetEmail(auth, signInFormValue.signin_email)
+        .then(() => {
+          toaster.push(
+            <Notification type="info" header="Reset Password" closable>
+              A password reset email has been sent to your email, please follow the instructions to reset your password!!
+            </Notification>,
+            {label: 'topEndbottomEnd', value: 'bottomEnd'})
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          // ..
+        });
+    }
 
     const signInUserWithEmail = (e) => {        
         if (!signInFormRef.current.check()) { 
@@ -144,6 +171,7 @@ function Login() {
                                     <Panel shaded>
                                         <Form ref={signInFormRef}
                                             model={signInModel}
+                                            onChange={updateSignInFormValues}
                                             onSubmit={signInUserWithEmail}>
                                             <Form.Group controlId="signin_email">
                                                 <Form.ControlLabel>Email</Form.ControlLabel>
@@ -155,12 +183,13 @@ function Login() {
                                                 <Form.Control name="signin_password" type="password" autoComplete="off" />
                                             </Form.Group>
                                             <Form.Group>
-                                            <ButtonToolbar>
+                                            <ButtonToolbar className=''>
                                                 <Button appearance="primary" type="submit">Submit</Button>
                                                 <Button appearance="default">Cancel</Button>
-                                            </ButtonToolbar>
+                                                <a href="#" onClick={(event)=> resetPassword(event)}>Reset password</a>
+                                            </ButtonToolbar>                                            
                                             </Form.Group>
-                                        </Form>
+                                        </Form>                                        
                                     </Panel>
                                 </FlexboxGrid.Item>
                                 <FlexboxGrid.Item as={Col} colspan={12}>
