@@ -9,30 +9,40 @@ import {React, useState, useEffect} from 'react'
 import axios from 'axios';
 import { useSelector, useDispatch } from 'react-redux'
 import { addRareDiseasesListResult } from "./reducer/GARDReducer"
+import { setWebAppUrl } from "./reducer/NotificationReducer"
 
 function App() {
   const dispatch = useDispatch()
+  // Access the secret.
+  const getWebAppUrl = () => {
+    //dispatch the settiing
+    let webUrl = process.env.REACT_APP_ARDENT_WEB_APP_URL
+    dispatch(setWebAppUrl({REACT_APP_ARDENT_WEB_APP_URL:webUrl}))
+    console.log('Value of app url:', webUrl)
+    return webUrl
+  }
 
   useEffect(() => {
     try{
-     let ARDENT_WEB_APP_URL = process.env.REACT_APP_ARDENT_WEB_APP_URL
-      const headers = {
-        "Content-Type": "application/json",
-      };      
-      axios.get(ARDENT_WEB_APP_URL + '/services/gard/all_rare_diseases/', {headers})
-      .then(response => {
-        console.log(response.data);
-        if(parseInt(response.status)==200)
-            dispatch(addRareDiseasesListResult({"rare_diseases": response.data.results}))
-      })
-      .catch(error => {
-        console.log(error);
-      });
-    }
-    catch(error){
-      console.log('An error occurred while fetching search results', error)
-    }
-  }, [])
+      let webUrl = getWebAppUrl()
+      let ARDENT_WEB_APP_URL = webUrl!=='' ? webUrl : process.env.REACT_APP_ARDENT_WEB_APP_URL
+        const headers = {
+          "Content-Type": "application/json",
+        };      
+        axios.get(ARDENT_WEB_APP_URL + '/services/gard/all_rare_diseases/', {headers})
+        .then(response => {
+          console.log(response.data);
+          if(parseInt(response.status)==200)
+              dispatch(addRareDiseasesListResult({"rare_diseases": response.data.results}))
+        })
+        .catch(error => {
+          console.log(error);
+        });
+      }
+      catch(error){
+        console.log('An error occurred while fetching search results', error)
+      }
+    }, [])
 
   return (    
     <>

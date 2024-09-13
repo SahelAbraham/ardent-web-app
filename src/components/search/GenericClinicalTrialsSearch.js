@@ -13,6 +13,7 @@ function GenericClinicalTrialsSearch({timelineData, timelineNodeIconArray}){
     const dispatch = useDispatch()
     const searchCTDiseaseResultsDisplay = useSelector((state) => state.searchClinicalTrials.clinicalTrialSearchResults.items)
     const rareDiseaseList = useSelector((state) => state.gardDiseases.rareDiseases.items)
+    const ardentWebAppUrl = useSelector((state) => state.initialization.REACT_APP_ARDENT_WEB_APP_URL)
     const rareDiseaseMap = rareDiseaseList.map(
       item => ({ label: item, value: item })
     );
@@ -86,7 +87,7 @@ function GenericClinicalTrialsSearch({timelineData, timelineNodeIconArray}){
           }
           else{
             try {
-                let ARDENT_WEB_APP_URL = process.env.REACT_APP_ARDENT_WEB_APP_URL
+                let ARDENT_WEB_APP_URL = ardentWebAppUrl!=='' ? ardentWebAppUrl : process.env.REACT_APP_ARDENT_WEB_APP_URL
                 let data = {
                     name: "string",
                     description: "string",

@@ -21,6 +21,7 @@ export default function SearchWorkspace() {
   const [nctId, setNctId] = useState("")
   const [ctDetailsLoading, setCTDetailsLoading] = useState(false);
   const [clinicalTrialsDetailsFlag, setClinicalTrialsDetailsFlag] = useState([]);
+  const ardentWebAppUrl = useSelector((state) => state.initialization.REACT_APP_ARDENT_WEB_APP_URL)
   const dispatch = useDispatch();
 
   const extractSearchResults = () => {
@@ -62,7 +63,7 @@ export default function SearchWorkspace() {
     else
     {
       try {
-        let ARDENT_WEB_APP_URL = process.env.REACT_APP_ARDENT_WEB_APP_URL
+        let ARDENT_WEB_APP_URL = ardentWebAppUrl!=='' ? ardentWebAppUrl : process.env.REACT_APP_ARDENT_WEB_APP_URL
         const headers = {
             "Content-Type": "application/json",
         };
