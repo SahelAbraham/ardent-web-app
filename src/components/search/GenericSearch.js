@@ -12,7 +12,7 @@ function GenericSearch(){
     const [queryStr, setQueryStr] = React.useState({textarea: ""});
     const formRef = React.useRef()
     const hardPrompt = 'You\'re an expert health care researcher who wants to obtain a summarized information about a disease and any progress that has been made. Don\'t make up any details or hallucinate information. Your response should be in two paragraphs or less'
-    const ardentWebAppUrl = useSelector((state) => state.initialization.REACT_APP_ARDENT_WEB_APP_URL)
+    const ardentWebAppUrl = useSelector((state) => state.notification.initialization.ardent_web_app_url)
     const [isLoading, setIsLoading] = useState(false);
     const [isLoaded, setIsLoaded] = useState(false);
     const searchResults = useSelector((state) => state.searchPubmedArticles.searchResults.items)

@@ -21,7 +21,7 @@ export default function SearchWorkspace() {
   const [nctId, setNctId] = useState("")
   const [ctDetailsLoading, setCTDetailsLoading] = useState(false);
   const [clinicalTrialsDetailsFlag, setClinicalTrialsDetailsFlag] = useState([]);
-  const ardentWebAppUrl = useSelector((state) => state.initialization.REACT_APP_ARDENT_WEB_APP_URL)
+  const ardentWebAppUrl = useSelector((state) => state.notification.initialization.ardent_web_app_url)
   const dispatch = useDispatch();
 
   const extractSearchResults = () => {

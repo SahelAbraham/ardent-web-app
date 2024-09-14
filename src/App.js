@@ -17,7 +17,7 @@ function App() {
   const getWebAppUrl = () => {
     //dispatch the settiing
     let webUrl = process.env.REACT_APP_ARDENT_WEB_APP_URL
-    dispatch(setWebAppUrl({REACT_APP_ARDENT_WEB_APP_URL:webUrl}))
+    dispatch(setWebAppUrl({ardent_web_app_url:webUrl}))
     console.log('Value of app url:', webUrl)
     return webUrl
   }

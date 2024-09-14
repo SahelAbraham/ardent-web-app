@@ -6,9 +6,11 @@ const initialState = {
         notifyMessage: "",
   },
   initialization: {
-    REACT_APP_ARDENT_WEB_APP_URL:'',
-    REACT_APP_USE_MOCK_DATA: false
-  }
+    ardent_web_app_url:"",
+    ardent_web_app_use_mock_data:false,
+    // REACT_APP_ARDENT_WEB_APP_URL:"",
+    // REACT_APP_USE_MOCK_DATA: false
+  },
 }
 
 export const NotificationSlice = createSlice({
@@ -25,7 +27,7 @@ export const NotificationSlice = createSlice({
       }};
     },
     setWebAppUrl: (state, action) => {
-      return {...state, initialization: {...state.initialization, REACT_APP_ARDENT_WEB_APP_URL : action.payload}};
+      return {...state, initialization: action.payload};
     },
   },
 })

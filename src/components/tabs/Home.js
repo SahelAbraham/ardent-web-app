@@ -5,8 +5,8 @@ import { useSelector } from 'react-redux'
 import { useToaster, Notification } from 'rsuite';
 
 function Home() {
-  const notifier = useSelector((state) => state.NotificationReducer)
-  const toaster = useToaster();
+  // const notifier = useSelector((state) => state.NotificationReducer)
+  // const toaster = useToaster();
 
   return (
     <>
