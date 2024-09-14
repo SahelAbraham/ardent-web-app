@@ -3,6 +3,9 @@
 # FROM node:14-slim
 FROM node:lts-alpine as builder
 
+ARG REACT_APP_ARDENT_WEB_APP_URL
+ENV REACT_APP_ARDENT_WEB_APP_URL=$REACT_APP_ARDENT_WEB_APP_URL
+
 # Create a directory for our application in the container 
 RUN mkdir /app-ui
 
