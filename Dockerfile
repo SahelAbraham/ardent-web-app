@@ -5,6 +5,8 @@ FROM node:lts-alpine as builder
 
 ARG REACT_APP_ARDENT_WEB_APP_URL
 ENV REACT_APP_ARDENT_WEB_APP_URL=$REACT_APP_ARDENT_WEB_APP_URL
+ARG REACT_APP_USE_MOCK_DATA
+ENV REACT_APP_USE_MOCK_DATA=$REACT_APP_USE_MOCK_DATA
 
 # Create a directory for our application in the container 
 RUN mkdir /app-ui
@@ -32,6 +34,6 @@ COPY ./nginx/nginx.conf /etc/nginx/nginx.conf
 ## Remove default nginx index page and replace it with the static files we created in the first step
 RUN rm -rf /usr/share/nginx/html/*
 COPY --from=builder /app-ui/build /usr/share/nginx/html
-EXPOSE 80
+EXPOSE 80 443
 
 CMD nginx -g 'daemon off;'
