@@ -57,6 +57,7 @@ export default function SearchWorkspace() {
     setNctId(nct_id)
 
     if (process.env.REACT_APP_USE_MOCK_DATA){
+      console.log("Using mock data to process")
       dispatch(addClinicalTrialDetails({"nct_id": nct_id,
                                         "details": processed_mock_resp}))
     }
