@@ -80,8 +80,8 @@ function GenericClinicalTrialsSearch({timelineData, timelineNodeIconArray}){
           executeSearchFlag = false
 
         if(executeSearchFlag){
-          if (process.env.REACT_APP_USE_MOCK_DATA){
-            console.log("Using mock data to process")
+          if (process.env.REACT_APP_USE_MOCK_DATA===true){
+            console.log("Using mock data to process", process.env.REACT_APP_USE_MOCK_DATA)
             dispatch(addClinicalTrialSearchResult({"question": "Give me up to date information about Duchenne Muscular Dystrophy", 
               "condition" : "Duchenne Muscular Dystrophy",
               "answer": processed_mock_resp}))
