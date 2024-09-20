@@ -90,7 +90,7 @@ function GenericSearch(){
                                 model={model} 
                                 onChange={setQueryStr} 
                                 onSubmit={fetchSearchResults}>
-                            <div style={{"margin-bottom" : "20px"}}>
+                            <div style={{"marginBottom" : "20px"}}>
                                 <Form.Group controlId="textarea">
                                     <FlexboxGrid.Item as={Col} colspan={16}>
                                         <Form.Control rows={5} name="textarea"/>

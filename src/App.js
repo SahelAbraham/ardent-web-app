@@ -10,6 +10,7 @@ import axios from 'axios';
 import { useSelector, useDispatch } from 'react-redux'
 import { addRareDiseasesListResult } from "./reducer/GARDReducer"
 import { setWebAppUrl } from "./reducer/NotificationReducer"
+import processed_mock_resp from './mockData/ctgardlist.json'
 
 function App() {
   const dispatch = useDispatch()
@@ -25,19 +26,29 @@ function App() {
   useEffect(() => {
     try{
       let webUrl = getWebAppUrl()
+      let mockDataUse = process.env.REACT_APP_USE_MOCK_DATA
       let ARDENT_WEB_APP_URL = webUrl!=='' ? webUrl : process.env.REACT_APP_ARDENT_WEB_APP_URL
         const headers = {
           "Content-Type": "application/json",
-        };      
-        axios.get(ARDENT_WEB_APP_URL + '/services/gard/all_rare_diseases/', {headers})
-        .then(response => {
-          console.log(response.data);
-          if(parseInt(response.status)==200)
-              dispatch(addRareDiseasesListResult({"rare_diseases": response.data.results}))
-        })
-        .catch(error => {
-          console.log(error);
-        });
+        };
+
+        if (mockDataUse==='true'){
+          let transformed_gard_list = processed_mock_resp.map(entry => {
+            return {"label": entry[1], "value": entry[1]}
+          })
+          dispatch(addRareDiseasesListResult({"rare_diseases": transformed_gard_list}))
+        }
+        else{
+          axios.get(ARDENT_WEB_APP_URL + '/services/gard/all_rare_diseases/', {headers})
+          .then(response => {
+            console.log(response.data);
+            if(parseInt(response.status)==200)
+                dispatch(addRareDiseasesListResult({"rare_diseases": response.data.results}))
+          })
+          .catch(error => {
+            console.log(error);
+          });
+        }
       }
       catch(error){
         console.log('An error occurred while fetching search results', error)

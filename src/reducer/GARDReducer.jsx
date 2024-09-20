@@ -11,7 +11,8 @@ export const GARDResultsSlice = createSlice({
   initialState,
   reducers: {
     addRareDiseasesListResult: (state, action) => {
-        state.rareDiseases.items = [...state.rareDiseases.items, action.payload];
+        // state.rareDiseases.items = [...state.rareDiseases.items, ...action.payload];
+        state.rareDiseases.items = action.payload["rare_diseases"]
     },
   },
 })

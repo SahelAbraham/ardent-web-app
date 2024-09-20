@@ -14,9 +14,7 @@ function GenericClinicalTrialsSearch({timelineData, timelineNodeIconArray}){
     const searchCTDiseaseResultsDisplay = useSelector((state) => state.searchClinicalTrials.clinicalTrialSearchResults.items)
     const rareDiseaseList = useSelector((state) => state.gardDiseases.rareDiseases.items)
     const ardentWebAppUrl = useSelector((state) => state.notification.initialization.ardent_web_app_url)
-    const rareDiseaseMap = rareDiseaseList.map(
-      item => ({ label: item, value: item })
-    );
+    const rareDiseaseMap = rareDiseaseList.map(item => {return item.label});
     const [defaultCTQueryPlaceholder, setDefaultCTQueryPlaceholder] = useState("")
     const [isLoading, setIsLoading] = useState(false);
     const [resolvedCTDisease, setResolvedCTDisease] = useState(false);
@@ -137,7 +135,7 @@ function GenericClinicalTrialsSearch({timelineData, timelineNodeIconArray}){
                 <Form 
                   onSubmit={fetchActiveClinicalTrialSearchResults}
                   >                  
-                  <div class='search-workspace-ct-child'>
+                  <div className='search-workspace-ct-child'>
                     <Form.Group controlId="rdQuestion">
                       <Whisper trigger="focus" placement="bottom" speaker={<Tooltip>Enter a more defined question for the search if needed</Tooltip>}>
                         <Input name="rdQuestion" style={{ width: 300 }} as="textarea" rows={3} 
@@ -149,13 +147,13 @@ function GenericClinicalTrialsSearch({timelineData, timelineNodeIconArray}){
                       </Whisper>
                     </Form.Group>
                   </div>
-                  <div class='search-workspace-ct-child'>
+                  <div className='search-workspace-ct-child'>
                     {/* <Form.Group controlId="rdEdit">
                       <IconButton color="blue" icon={<PlusRoundIcon />} size="lg" />                      
                     </Form.Group> */}
                     <p>and</p>
                   </div>
-                  <div class='search-workspace-ct-child'>
+                  <div className='search-workspace-ct-child'>
                     <Form.Group name="rdSelector" controlId="rdSelector">
                     
                       <InlineEdit
@@ -163,15 +161,15 @@ function GenericClinicalTrialsSearch({timelineData, timelineNodeIconArray}){
                         style={{ width: 180 }}
                         defaultValue={['']}
                       >
-                        <TagPicker name="rdSelector" data={rareDiseaseMap} block
+                        <TagPicker name="rdSelector" data={rareDiseaseList} block
                           onChange={(val, evt)=>{
                             handleClinicalTrialsSearchWorkspaceChange(val, evt)
                           }}/>
                       </InlineEdit>                    
                     </Form.Group>
                   </div>
-                  <div class='search-workspace-ct-child'>or</div>
-                  <div class='search-workspace-ct-child'>
+                  <div className='search-workspace-ct-child'>or</div>
+                  <div className='search-workspace-ct-child'>
                     <Form.Group name="rdTextDiseaseEntry" controlId="rdTextDiseaseEntry">
                       <InlineEdit name="rdTextDiseaseEntry" placeholder="Type a rare disease..." style={{ width: 300 }} 
                         onChange={(val, evt)=>{
@@ -180,7 +178,7 @@ function GenericClinicalTrialsSearch({timelineData, timelineNodeIconArray}){
                       />
                     </Form.Group>
                   </div>                  
-                  <div class='search-workspace-ct-child'>
+                  <div className='search-workspace-ct-child'>
                     <Form.Group controlId="rdQuestionSearchButton">
                       <ButtonToolbar>
                         <IconButton type="submit" appearance="primary" color="blue" icon={<SearchIcon />}>
