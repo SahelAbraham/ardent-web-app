@@ -19,7 +19,7 @@ function App() {
     //dispatch the settiing
     let webUrl = process.env.REACT_APP_ARDENT_WEB_APP_URL
     dispatch(setWebAppUrl({ardent_web_app_url:webUrl}))
-    console.log('Value of app url:', webUrl)
+    // console.log('Value of app url:', webUrl)
     return webUrl
   }
 
