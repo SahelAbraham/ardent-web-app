@@ -14,7 +14,6 @@ function GenericClinicalTrialsSearch({timelineData, timelineNodeIconArray}){
     const searchCTDiseaseResultsDisplay = useSelector((state) => state.searchClinicalTrials.clinicalTrialSearchResults.items)
     const rareDiseaseList = useSelector((state) => state.gardDiseases.rareDiseases.items)
     const ardentWebAppUrl = useSelector((state) => state.notification.initialization.ardent_web_app_url)
-    const rareDiseaseMap = rareDiseaseList.map(item => {return item.label});
     const [defaultCTQueryPlaceholder, setDefaultCTQueryPlaceholder] = useState("")
     const [isLoading, setIsLoading] = useState(false);
     const [resolvedCTDisease, setResolvedCTDisease] = useState(false);
