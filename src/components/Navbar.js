@@ -5,7 +5,7 @@ import './Navbar.css'
 import Login from './login/Login'
 import MobileApp from './mobileApp/MobileApp'
 
-import { Button, ButtonToolbar } from 'rsuite';
+import { Button, ButtonToolbar, Modal, Placeholder } from 'rsuite';
 
 function Navbar() {
   const [click, setClick] = useState(false)
@@ -53,7 +53,7 @@ function Navbar() {
                 <Link to='/about' className='nav-links' onClick={closeMobileMenu}>
                   About
                 </Link>
-              </li>
+              </li>              
               <li className='nav-item'>
                 <div className='nav-links'>
                   <Login/>

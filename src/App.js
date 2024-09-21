@@ -11,6 +11,15 @@ import { useSelector, useDispatch } from 'react-redux'
 import { addRareDiseasesListResult } from "./reducer/GARDReducer"
 import { setWebAppUrl } from "./reducer/NotificationReducer"
 import processed_mock_resp from './mockData/ctgardlist.json'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { Link } from "react-router-dom";
+
+const CustomToastWithLink = () => (
+  <div style={{textAlign:"center"}}>    
+    <Link to="https://ai.google.dev/competition/projects/ardent" target="_blank">Vote for Ardent in Gemini API Competition</Link>
+  </div>
+);
 
 function App() {
   const dispatch = useDispatch()
@@ -24,6 +33,17 @@ function App() {
   }
 
   useEffect(() => {
+    toast(<CustomToastWithLink/>, {
+      position: "bottom-center",
+      autoClose: 50000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+      });
+
     try{
       let webUrl = getWebAppUrl()
       let mockDataUse = process.env.REACT_APP_USE_MOCK_DATA
@@ -58,6 +78,17 @@ function App() {
   return (    
     <>
       <Router>
+        <ToastContainer
+          position="bottom-center"
+          autoClose={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          theme="light"
+          // transition: Bounce,
+          />        
         <Navbar/>
         <Routes>
           <Route path='/' exact element={<Home/>}/>
