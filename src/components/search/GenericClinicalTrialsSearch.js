@@ -1,4 +1,4 @@
-import { Form, Whisper, Input, Tooltip, InlineEdit, TagPicker, IconButton, ButtonToolbar, Notification, useToaster, Loader } from 'rsuite';
+import { Form, Whisper, Input, Tooltip, InlineEdit, TagPicker, IconButton, ButtonToolbar, Notification, useToaster, Loader, SelectPicker } from 'rsuite';
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import { useSelector, useDispatch } from 'react-redux'
@@ -24,13 +24,13 @@ function GenericClinicalTrialsSearch({timelineData, timelineNodeIconArray}){
         rdQuestionSearchButtonFlag : false
         }});
         
-        const handleClinicalTrialsSearchWorkspaceChange = (val, evt) => {
-        const { id, value } = evt.target;
+      const handleClinicalTrialsSearchWorkspaceChange = (component, value, evt) => {
+        // const { id, value } = evt.target;
 
         setClinicalTrialsSearchFormInput(prevState => ({
             ...prevState,
             formInput: {
-            ...prevState.formInput, [id] : value,
+            ...prevState.formInput, [component] : value,
             }
         }))
     }
@@ -102,9 +102,13 @@ function GenericClinicalTrialsSearch({timelineData, timelineNodeIconArray}){
                     if(parseInt(response.status)===200){
                         // let processed_resp = extractSearchResults(response.data, clinicalTrialsSearchFormInput.formInput.rdQuestion + clinicalTrialsSearchFormInput.formInput.rdTextDiseaseEntry)
                         let processed_resp = response.data
-                        dispatch(addClinicalTrialSearchResult({"question": clinicalTrialsSearchFormInput.formInput.rdQuestion, 
-                                                                "condition" : resolvedCTDisease,
-                                                                "answer": processed_resp}))
+                        dispatch(addClinicalTrialSearchResult(
+                          {
+                            // "question": clinicalTrialsSearchFormInput.formInput.rdQuestion, 
+                            "question": resolvedQuestion, 
+                            "condition" : resolvedCTDisease,
+                            "answer": processed_resp
+                          }))
                     }
                     else
                         dispatch(addClinicalTrialSearchResult({"question": clinicalTrialsSearchFormInput.formInput.rdQuestion, 
@@ -139,7 +143,7 @@ function GenericClinicalTrialsSearch({timelineData, timelineNodeIconArray}){
                       <Whisper trigger="focus" placement="bottom" speaker={<Tooltip>Enter a more defined question for the search if needed</Tooltip>}>
                         <Input name="rdQuestion" style={{ width: 300 }} as="textarea" rows={3} 
                           onChange={(val, evt)=>{
-                            handleClinicalTrialsSearchWorkspaceChange(val, evt)
+                            handleClinicalTrialsSearchWorkspaceChange("rdQuestion", val, evt)
                           }}                        
                         //   placeholder="Default question: Retrieve actively recruiting clinical trials related to the selected/entered rare disease" 
                             placeholder = {defaultCTQueryPlaceholder}/>
@@ -160,10 +164,14 @@ function GenericClinicalTrialsSearch({timelineData, timelineNodeIconArray}){
                         style={{ width: 180 }}
                         defaultValue={['']}
                       >
-                        <TagPicker name="rdSelector" data={rareDiseaseList} block
-                          onChange={(val, evt)=>{
-                            handleClinicalTrialsSearchWorkspaceChange(val, evt)
-                          }}/>
+                        <SelectPicker name="rdSelector" appearance="default" placeholder="Default" style={{ width: 224 }} 
+                        data={rareDiseaseList.map(
+                          entry => {return entry ? {'label':entry[1], 'value':entry[1]} : {'label':'', 'value':''}})} block
+                          onSelect={(val, item, evt) => handleClinicalTrialsSearchWorkspaceChange("rdSelector", val, evt)}
+                          // onChange={(val, evt)=>{
+                          //   handleClinicalTrialsSearchWorkspaceChange(val, evt)
+                          // }}
+                          />
                       </InlineEdit>                    
                     </Form.Group>
                   </div>
@@ -172,7 +180,7 @@ function GenericClinicalTrialsSearch({timelineData, timelineNodeIconArray}){
                     <Form.Group name="rdTextDiseaseEntry" controlId="rdTextDiseaseEntry">
                       <InlineEdit name="rdTextDiseaseEntry" placeholder="Type a rare disease..." style={{ width: 300 }} 
                         onChange={(val, evt)=>{
-                          handleClinicalTrialsSearchWorkspaceChange(val, evt)
+                          handleClinicalTrialsSearchWorkspaceChange("rdTextDiseaseEntry", val, evt)
                         }}                      
                       />
                     </Form.Group>

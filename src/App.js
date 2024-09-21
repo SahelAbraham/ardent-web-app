@@ -63,7 +63,7 @@ function App() {
           .then(response => {
             console.log(response.data);
             if(parseInt(response.status)==200)
-                dispatch(addRareDiseasesListResult({"rare_diseases": response.data.results}))
+                dispatch(addRareDiseasesListResult({"rare_diseases": response.data}))
           })
           .catch(error => {
             console.log(error);
