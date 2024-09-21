@@ -144,7 +144,7 @@ export default function SearchWorkspace() {
                     {isLoading ? 
                       <div>
                           <Placeholder.Paragraph graph="circle" active />
-                          <Loader center content="Retrieving answer..." />
+                          <Loader center content="Answering from medical literature..." />
                       </div> 
                       : 
                       <div>
