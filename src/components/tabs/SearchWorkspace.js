@@ -107,10 +107,10 @@ export default function SearchWorkspace() {
       <Container>
         <Header></Header>
         <Container>
-          <Sidebar>
+          {/* <Sidebar>
             <div className='workspace'>
             </div>
-          </Sidebar>
+          </Sidebar> */}
           <Content>
               <div>
                 <div className='description-container'>
@@ -121,9 +121,11 @@ export default function SearchWorkspace() {
                     <p>For individuals as well as families living with rare diseases, information is but the first step of a difficult and often lonely journey.</p>
                     <p>Our point of view, having experienced the pain, confusion and apprehensiveness of such a journey is to provide the most relevant and up to date information about everything you need to make informed decisions about your next steps.</p>
                 </div>
-              <Panel header="Learn about a specific rare disease - causes, symptoms and progress to a cure" shaded>
-                <GenericSearch/>
-              </Panel>
+              <div className='description-container'>
+                <Panel header="Learn about a specific rare disease - causes, symptoms and progress to a cure" shaded>
+                  <GenericSearch/>
+                </Panel>                
+              </div>
             </div>
 
             <div>
@@ -135,53 +137,55 @@ export default function SearchWorkspace() {
                   Studying rare diseases is challenging. Participant pools are small and restricted by rigid inclusion and exclusion criteria. There is often incomplete understanding of genotype–phenotype relationships. The below search will retrieved
                   clinical trials for your particular rare disease</p>
               </div>
-              <Panel header="Search for clinical trials that are recruiting for finding cures to Rare Diseases. " shaded>
-                <GenericClinicalTrialsSearch/>
-                <Panel header="Clinical Trials information (Recruiting only)" shaded>
-                  {isLoading ? 
-                    <div>
-                        <Placeholder.Paragraph graph="circle" active />
-                        <Loader center content="Retrieving answer..." />
-                    </div> 
-                    : 
-                    <div>
-                      <PanelGroup accordion bordered>
-                        {Object.entries(searchCTDiseaseDisplay).map(([key, value]) => {
-                          return (value !== null && value.answer != null) ? 
-                            <Panel header={`Question: ${value.question}`} shaded>  
-                              {value.answer.map((mapValue, mapKey) => (
-                                <Panel header={`NCT ID: ${mapValue.nct_id} - ${mapValue.brief_title}`} key={mapKey}>
-                                  <p>{`Study Title: ${mapValue.official_title}`}</p>                                
-                                  {clinicalTrialsDetailsFlag.indexOf(mapValue.nct_id) > -1 ? 
-                                    <Panel header={`Details for ${mapValue.nct_id}`} shaded>
-                                        <p>Trial phase : {(Object.keys(searchCTDetailsDisplay).length <= 1) ? "Data not available" : (mapValue.nct_id !== searchCTDetailsDisplay["details"]["clinical_trial_studies_info"]["nct_id"] ? "Data not available" : searchCTDetailsDisplay["details"]["clinical_trial_studies_info"]["phase"])}</p>
-                                        <p>Trial study type : {(Object.keys(searchCTDetailsDisplay).length <= 1) ? "Data not available" : (mapValue.nct_id !== searchCTDetailsDisplay["details"]["clinical_trial_studies_info"]["nct_id"] ? "Data not available" :  searchCTDetailsDisplay["details"]["clinical_trial_studies_info"]["study_type"])}</p>
-                                        <p>Trial sponsor/lead : {(Object.keys(searchCTDetailsDisplay).length <= 1) ? "Data not available" : (mapValue.nct_id !== searchCTDetailsDisplay["details"]["clinical_trial_studies_sponsors"]["nct_id"] ? "Data not available" : searchCTDetailsDisplay["details"]["clinical_trial_studies_sponsors"]["name"])}</p>
-                                        <p>Trial status : {(Object.keys(searchCTDetailsDisplay).length <= 1) ? "Data not available" : (mapValue.nct_id !== searchCTDetailsDisplay["details"]["clinical_trial_studies_info"]["nct_id"] ? "Data not available" : searchCTDetailsDisplay["details"]["clinical_trial_studies_info"]["overall_status"])}</p>
-                                        <p>Trial enrollment : {(Object.keys(searchCTDetailsDisplay).length <= 1) ? "Data not available" : (mapValue.nct_id !== searchCTDetailsDisplay["details"]["clinical_trial_studies_info"]["nct_id"] ? "Data not available" : searchCTDetailsDisplay["details"]["clinical_trial_studies_info"]["enrollment"])}</p>
-                                        <p>Trial start date: {(Object.keys(searchCTDetailsDisplay).length <= 1) ? "Data not available" : (mapValue.nct_id !== searchCTDetailsDisplay["details"]["clinical_trial_studies_info"]["nct_id"] ? "Data not available" : new Date(searchCTDetailsDisplay["details"]["clinical_trial_studies_info"]["created_at"]).toLocaleDateString('en-US'))}</p>
-                                        <p>Trial completion date (expected/estimated): {(Object.keys(searchCTDetailsDisplay).length <= 1) ? "Data not available" : (mapValue.nct_id !== searchCTDetailsDisplay["details"]["clinical_trial_studies_info"]["nct_id"] ? "Data not available" : new Date(searchCTDetailsDisplay["details"]["clinical_trial_studies_info"]["completion_date"]).toLocaleDateString('en-US'))}</p>
-                                      </Panel> :
-                                      ctDetailsLoading ? <Button appearance="ghost" loading>Get more details</Button> : <Button appearance="ghost" onClick={() => fetchCTDetailsByNCT(mapValue.nct_id)}>Get more details</Button>
-                                  }
-                                </Panel>
-                              ))} 
-                            </Panel>
-                            : null;
-                        })}
-                      </PanelGroup>                      
-                    </div>}
+              <div className='description-container'>
+                <Panel header="Search for clinical trials that are recruiting for finding cures to Rare Diseases. " shaded>
+                  <GenericClinicalTrialsSearch/>
+                  <Panel header="Clinical Trials information (Recruiting only)" shaded>
+                    {isLoading ? 
+                      <div>
+                          <Placeholder.Paragraph graph="circle" active />
+                          <Loader center content="Retrieving answer..." />
+                      </div> 
+                      : 
+                      <div>
+                        <PanelGroup accordion bordered>
+                          {Object.entries(searchCTDiseaseDisplay).map(([key, value]) => {
+                            return (value !== null && value.answer != null) ? 
+                              <Panel header={`Question: ${value.question}`} shaded>  
+                                {value.answer.map((mapValue, mapKey) => (
+                                  <Panel header={`NCT ID: ${mapValue.nct_id} - ${mapValue.brief_title}`} key={mapKey}>
+                                    <p>{`Study Title: ${mapValue.official_title}`}</p>                                
+                                    {clinicalTrialsDetailsFlag.indexOf(mapValue.nct_id) > -1 ? 
+                                      <Panel header={`Details for ${mapValue.nct_id}`} shaded>
+                                          <p>Trial phase : {(Object.keys(searchCTDetailsDisplay).length <= 1) ? "Data not available" : (mapValue.nct_id !== searchCTDetailsDisplay["details"]["clinical_trial_studies_info"]["nct_id"] ? "Data not available" : searchCTDetailsDisplay["details"]["clinical_trial_studies_info"]["phase"])}</p>
+                                          <p>Trial study type : {(Object.keys(searchCTDetailsDisplay).length <= 1) ? "Data not available" : (mapValue.nct_id !== searchCTDetailsDisplay["details"]["clinical_trial_studies_info"]["nct_id"] ? "Data not available" :  searchCTDetailsDisplay["details"]["clinical_trial_studies_info"]["study_type"])}</p>
+                                          <p>Trial sponsor/lead : {(Object.keys(searchCTDetailsDisplay).length <= 1) ? "Data not available" : (mapValue.nct_id !== searchCTDetailsDisplay["details"]["clinical_trial_studies_sponsors"]["nct_id"] ? "Data not available" : searchCTDetailsDisplay["details"]["clinical_trial_studies_sponsors"]["name"])}</p>
+                                          <p>Trial status : {(Object.keys(searchCTDetailsDisplay).length <= 1) ? "Data not available" : (mapValue.nct_id !== searchCTDetailsDisplay["details"]["clinical_trial_studies_info"]["nct_id"] ? "Data not available" : searchCTDetailsDisplay["details"]["clinical_trial_studies_info"]["overall_status"])}</p>
+                                          <p>Trial enrollment : {(Object.keys(searchCTDetailsDisplay).length <= 1) ? "Data not available" : (mapValue.nct_id !== searchCTDetailsDisplay["details"]["clinical_trial_studies_info"]["nct_id"] ? "Data not available" : searchCTDetailsDisplay["details"]["clinical_trial_studies_info"]["enrollment"])}</p>
+                                          <p>Trial start date: {(Object.keys(searchCTDetailsDisplay).length <= 1) ? "Data not available" : (mapValue.nct_id !== searchCTDetailsDisplay["details"]["clinical_trial_studies_info"]["nct_id"] ? "Data not available" : new Date(searchCTDetailsDisplay["details"]["clinical_trial_studies_info"]["created_at"]).toLocaleDateString('en-US'))}</p>
+                                          <p>Trial completion date (expected/estimated): {(Object.keys(searchCTDetailsDisplay).length <= 1) ? "Data not available" : (mapValue.nct_id !== searchCTDetailsDisplay["details"]["clinical_trial_studies_info"]["nct_id"] ? "Data not available" : new Date(searchCTDetailsDisplay["details"]["clinical_trial_studies_info"]["completion_date"]).toLocaleDateString('en-US'))}</p>
+                                        </Panel> :
+                                        ctDetailsLoading ? <Button appearance="ghost" loading>Get more details</Button> : <Button appearance="ghost" onClick={() => fetchCTDetailsByNCT(mapValue.nct_id)}>Get more details</Button>
+                                    }
+                                  </Panel>
+                                ))} 
+                              </Panel>
+                              : null;
+                          })}
+                        </PanelGroup>                      
+                      </div>}
+                  </Panel>
                 </Panel>
-              </Panel>
+              </div>
             </div>
 
           </Content>
-          <Sidebar>
+          {/* <Sidebar>
             <div className='workspace'>
             </div>
-          </Sidebar>
+          </Sidebar> */}
         </Container>
-        <Footer>Footer</Footer>
+        {/* <Footer>Footer</Footer> */}
       </Container>
     </div>
   );

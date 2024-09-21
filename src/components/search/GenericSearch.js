@@ -1,14 +1,14 @@
 import React, {useState, useEffect} from 'react';
-import { Loader, Button, Col } from 'rsuite';
+import { useMediaQuery, Loader, Button, Col, Stack, HStack } from 'rsuite';
 import { Form, ButtonToolbar, FlexboxGrid, PanelGroup, Panel, Placeholder } from 'rsuite';
 import { SchemaModel, StringType } from "schema-typed"
 import axios from 'axios';
 import { useSelector, useDispatch } from 'react-redux'
 import { addSearchResult, resetSearchResult } from "../../reducer/SearchPubmedArticlesReducer"
+import './Search.css'
 
 function GenericSearch(){
-    // const [open, setOpen] = React.useState(false);
-    // const [placement, setPlacement] = React.useState();
+    const [isMobile] = useMediaQuery('(max-width: 700px)');
     const [queryStr, setQueryStr] = React.useState({textarea: ""});
     const formRef = React.useRef()
     const hardPrompt = 'You\'re an expert health care researcher who wants to obtain a summarized information about a disease and any progress that has been made. Don\'t make up any details or hallucinate information. Your response should be in two paragraphs or less'
@@ -83,50 +83,57 @@ function GenericSearch(){
 
     return (
         <div>
-            <FlexboxGrid>
-                <FlexboxGrid.Item className='search-container' as={Col} colspan={10}>
-                    <Panel header="Enter your question:" bordered shaded>
-                        <Form ref={formRef} 
-                                model={model} 
-                                onChange={setQueryStr} 
-                                onSubmit={fetchSearchResults}>
-                            <div style={{"marginBottom" : "20px"}}>
-                                <Form.Group controlId="textarea">
-                                    <FlexboxGrid.Item as={Col} colspan={16}>
-                                        <Form.Control rows={5} name="textarea"/>
-                                    </FlexboxGrid.Item>
-                                    <FlexboxGrid.Item as={Col} colspan={4}>
-                                        <ButtonToolbar>
-                                            <Button appearance="primary" type="submit">Search</Button>
-                                        </ButtonToolbar>
-                                        <br/>
-                                    </FlexboxGrid.Item>
-                                </Form.Group>
-                            </div>
-                        </Form>
-                    </Panel>                    
-                </FlexboxGrid.Item>
-                <FlexboxGrid.Item className='search-container' as={Col} colspan={12}>
-                    <Panel header="Search Results" shaded>
-                        {isLoading ? 
-                        <div>
-                            <Placeholder.Paragraph graph="circle" active />
-                            <Loader center content="Retrieving answer..." />
-                        </div> 
-                        : (isLoaded ?
-                        <div>
-                            <PanelGroup accordion bordered>
-                                {searchResultsDisplay.map(function(object, i){
-                                    return isLoading ? <Panel header={object.question} key={i}><Placeholder.Paragraph/></Panel> : 
-                                    <Panel header={object.question} key={i}><p>{object.answer}</p></Panel>
-                                })}
-                            </PanelGroup>
-                        </div> : 
-                        <div>
-                            <Placeholder.Paragraph graph="circle" />
-                        </div>)}
-                    </Panel>
-                </FlexboxGrid.Item>
+            <FlexboxGrid className='generic-search-container'>
+                <Stack direction={isMobile ? 'column' : 'row'} spacing={2}>
+                    <FlexboxGrid.Item as={Col} colspan={10}>
+                            <Panel className='generic-search-panel' header="Enter your question:" bordered shaded>
+                                <Form ref={formRef} 
+                                        model={model} 
+                                        onChange={setQueryStr} 
+                                        onSubmit={fetchSearchResults}>
+                                    <div style={{"marginBottom" : "20px"}}>
+                                        <Form.Group controlId="textarea">
+                                            <HStack>
+                                                <div>
+                                                    <FlexboxGrid.Item as={Col} colspan={16}>
+                                                        <Form.Control rows={5} name="textarea"/>
+                                                    </FlexboxGrid.Item>
+                                                </div>
+                                                <div>
+                                                    <FlexboxGrid.Item as={Col} colspan={6}>
+                                                        {/* <ButtonToolbar> */}
+                                                            <Button appearance="primary" type="submit">Search</Button>
+                                                        {/* </ButtonToolbar>                                                         */}
+                                                    </FlexboxGrid.Item>
+                                                </div>
+                                            </HStack>
+                                        </Form.Group>
+                                    </div>
+                                </Form>
+                            </Panel>                    
+                        </FlexboxGrid.Item>
+                        <FlexboxGrid.Item as={Col} colspan={12}>
+                            <Panel className='generic-search-panel' header="Search Results" shaded>
+                                {isLoading ? 
+                                <div>
+                                    <Placeholder.Paragraph graph="circle" active />
+                                    <Loader center content="Retrieving answer..." />
+                                </div> 
+                                : (isLoaded ?
+                                <div>
+                                    <PanelGroup accordion bordered>
+                                        {searchResultsDisplay.map(function(object, i){
+                                            return isLoading ? <Panel header={object.question} key={i}><Placeholder.Paragraph/></Panel> : 
+                                            <Panel header={object.question} key={i}><p>{object.answer}</p></Panel>
+                                        })}
+                                    </PanelGroup>
+                                </div> : 
+                                <div>
+                                    <Placeholder.Paragraph graph="circle" />
+                                </div>)}
+                            </Panel>
+                        </FlexboxGrid.Item>
+                </Stack>
             </FlexboxGrid>
         </div>
     );

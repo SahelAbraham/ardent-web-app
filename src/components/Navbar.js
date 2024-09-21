@@ -65,7 +65,7 @@ function Navbar() {
                 </div>                
               </li>*/}            
             </ul>
-            {button && <TrySearchButton buttonStyle='btn--outline'>Get the App!</TrySearchButton>}
+            {/* {button && <TrySearchButton buttonStyle='btn--outline'>Get the App!</TrySearchButton>} */}
         </div>
       </nav>
     </>

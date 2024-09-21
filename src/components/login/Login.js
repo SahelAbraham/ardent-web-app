@@ -153,9 +153,9 @@ function Login() {
 
     return (
         <div>
-            <ButtonToolbar>
-                <Button onClick={handleOpen}>Sign In/Up</Button>
-            </ButtonToolbar>
+            {/* <ButtonToolbar> */}
+            <Button onClick={handleOpen}>Sign In/Up</Button>
+            {/* </ButtonToolbar> */}
 
             <Modal open={open} onClose={handleClose} size={'lg'}>
                 <Modal.Header>

@@ -26,6 +26,7 @@
   border-radius: 10px;
   /* background-color: rgba(128,128,128, 0.8); */
   display: flex;
+  flex: 1;
   flex-direction: column;
   justify-content: center;
   align-items: left;
