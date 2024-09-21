@@ -113,7 +113,7 @@ function GenericSearch(){
                             </Panel>                    
                         </FlexboxGrid.Item>
                         <FlexboxGrid.Item as={Col} colspan={12}>
-                            <Panel className='generic-search-panel' header="Search Results" shaded>
+                            <Panel className='generic-search-results-panel' header="Search Results" shaded>
                                 {isLoading ? 
                                 <div>
                                     <Placeholder.Paragraph graph="circle" active />
