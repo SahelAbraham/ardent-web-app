@@ -1,4 +1,4 @@
-import { Form, Whisper, Input, Tooltip, InlineEdit, TagPicker, IconButton, ButtonToolbar, Notification, useToaster } from 'rsuite';
+import { Form, Whisper, Input, Tooltip, InlineEdit, TagPicker, IconButton, ButtonToolbar, Notification, useToaster, Loader } from 'rsuite';
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import { useSelector, useDispatch } from 'react-redux'
@@ -130,7 +130,7 @@ function GenericClinicalTrialsSearch({timelineData, timelineNodeIconArray}){
     };
 
     return(
-        <div className='search-workspace-ct-parent'>
+        <div className='search-workspace-ct-parent'>                
                 <Form 
                   onSubmit={fetchActiveClinicalTrialSearchResults}
                   >                  
@@ -145,7 +145,7 @@ function GenericClinicalTrialsSearch({timelineData, timelineNodeIconArray}){
                             placeholder = {defaultCTQueryPlaceholder}/>
                       </Whisper>
                     </Form.Group>
-                  </div>
+                  </div>                  
                   <div className='search-workspace-ct-child'>
                     {/* <Form.Group controlId="rdEdit">
                       <IconButton color="blue" icon={<PlusRoundIcon />} size="lg" />                      
@@ -187,6 +187,7 @@ function GenericClinicalTrialsSearch({timelineData, timelineNodeIconArray}){
                     </Form.Group>                      
                   </div>
                 </Form>
+                {isLoading ? <Loader backdrop size="md" content="Answering from clinical trials..." /> : ''}
               </div>
     )
 }

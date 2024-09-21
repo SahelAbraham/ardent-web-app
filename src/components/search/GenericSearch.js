@@ -117,7 +117,7 @@ function GenericSearch(){
                             {isLoading ? 
                             <div>
                                 <Placeholder.Paragraph graph="circle" active />
-                                <Loader center content="Answering from medical literature..." />
+                                <Loader  backdrop size="md" content="Answering from medical literature..." />
                             </div> 
                             : (isLoaded ?
                             <div>

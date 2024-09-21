@@ -167,7 +167,7 @@ function Login() {
                             <FlexboxGrid justify="space-between">
                                 <FlexboxGrid.Item as={Col} colspan={12}>
                                     <h2>Sign In</h2>
-                                    {isLoading ? <Loader center content="Authenticating..." /> : ''}
+                                    {isLoading ? <Loader  backdrop size="md" content="Authenticating..." /> : ''}
                                     <Panel shaded>
                                         <Form ref={signInFormRef}
                                             model={signInModel}
@@ -194,7 +194,7 @@ function Login() {
                                 </FlexboxGrid.Item>
                                 <FlexboxGrid.Item as={Col} colspan={12}>
                                     <h2>Sign Up</h2>
-                                    {isLoading ? <Loader center content="Signing in..." /> : ''}
+                                    {isLoading ? <Loader  backdrop size="md" content="Signing in..." /> : ''}
                                     <Panel shaded>
                                         <Form ref={signUpFormRef}
                                             model={signUpModel}

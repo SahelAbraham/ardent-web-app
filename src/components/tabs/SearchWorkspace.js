@@ -68,7 +68,7 @@ export default function SearchWorkspace() {
         const headers = {
             "Content-Type": "application/json",
         };
-
+        setIsLoading(true)
         axios.post(ARDENT_WEB_APP_URL + "/services/clinical_trials/" + nct_id + "/study_info", {headers})
         .then(response => {
             console.log(response.data);
@@ -144,7 +144,7 @@ export default function SearchWorkspace() {
                     {isLoading ? 
                       <div>
                           <Placeholder.Paragraph graph="circle" active />
-                          <Loader center content="Answering from medical literature..." />
+                          <Loader  backdrop size="md" content="Answering from clinical trials..." />
                       </div> 
                       : 
                       <div>
