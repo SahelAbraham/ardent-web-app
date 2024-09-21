@@ -1,5 +1,5 @@
 import '../../App.css'
-import { Panel, PanelGroup, Placeholder, Container, Header, Content, Footer, Sidebar, Loader, Button, ButtonToolbar } from 'rsuite';
+import { Panel, PanelGroup, Placeholder, Container, Header, Content, Footer, Sidebar, Loader, Button, ButtonToolbar, Accordion } from 'rsuite';
 import SearchIcon from '@rsuite/icons/Search';
 import {React, useState, useEffect} from 'react'
 import { useSelector, useDispatch } from 'react-redux'
@@ -11,6 +11,7 @@ import { addClinicalTrialDetails,  resetClinicalTrialDetails } from '../../reduc
 import processed_mock_resp from '../../mockData/ctdetails.json'
 import GenericSearch from '../search/GenericSearch';
 import '../Description.css'
+import { FaAngleDoubleDown, FaArrowAltCircleDown, FaArrowDown } from 'react-icons/fa';
 
 export default function SearchWorkspace() {
   const [isLoading, setIsLoading] = useState(false);
@@ -148,12 +149,12 @@ export default function SearchWorkspace() {
                       </div> 
                       : 
                       <div>
-                        <PanelGroup accordion bordered>
+                        <Accordion defaultExpanded bordered>
                           {Object.entries(searchCTDiseaseDisplay).map(([key, value]) => {
                             return (value !== null && value.answer != null) ? 
-                              <Panel header={`Question: ${value.question}`} shaded>  
+                              <Accordion.Panel header={`Question: ${value.question}`} shaded caretAs={FaArrowDown}>  
                                 {value.answer.map((mapValue, mapKey) => (
-                                  <Panel header={`NCT ID: ${mapValue.nct_id} - ${mapValue.brief_title}`} key={mapKey}>
+                                  <Accordion.Panel defaultExpanded header={`NCT ID: ${mapValue.nct_id} - ${mapValue.brief_title}`} key={mapKey} caretAs={FaArrowDown}>
                                     <p>{`Study Title: ${mapValue.official_title}`}</p>                                
                                     {clinicalTrialsDetailsFlag.indexOf(mapValue.nct_id) > -1 ? 
                                       <Panel header={`Details for ${mapValue.nct_id}`} shaded>
@@ -167,12 +168,12 @@ export default function SearchWorkspace() {
                                         </Panel> :
                                         ctDetailsLoading ? <Button appearance="ghost" loading>Get more details</Button> : <Button appearance="ghost" onClick={() => fetchCTDetailsByNCT(mapValue.nct_id)}>Get more details</Button>
                                     }
-                                  </Panel>
+                                  </Accordion.Panel>
                                 ))} 
-                              </Panel>
+                              </Accordion.Panel>
                               : null;
                           })}
-                        </PanelGroup>                      
+                        </Accordion>                      
                       </div>}
                   </Panel>
                 </Panel>
