@@ -28,7 +28,7 @@ function Description() {
                 life is our community.
               </p>
               
-              <p>Information is one piece of the puzzle.e are working hard to help patients and families find help from
+              <p>Information is one piece of the puzzle. We are working hard to help patients and families find help from
                 the community at large. In our own experience, it was critical to find a community of fellow patients from all around
                 the world in order to sift through research, treatment options to pursue and even avoid.
               </p>

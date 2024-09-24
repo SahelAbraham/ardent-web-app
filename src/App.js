@@ -17,7 +17,7 @@ import { Link } from "react-router-dom";
 
 const CustomToastWithLink = () => (
   <div style={{textAlign:"center"}}>    
-    <Link to="https://ai.google.dev/competition/projects/ardent" target="_blank">Vote for Ardent in Gemini API Competition</Link>
+    <Link to="https://ai.google.dev/competition/projects/ardent" target="_blank">Vote for ARDENT in Gemini API Competition</Link>
   </div>
 );
 
