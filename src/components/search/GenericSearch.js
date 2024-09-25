@@ -90,17 +90,18 @@ function GenericSearch(){
                             <Form ref={formRef} 
                                     model={model} 
                                     onChange={setQueryStr} 
-                                    onSubmit={fetchSearchResults}>
+                                    onSubmit={fetchSearchResults}
+                                    fluid>
                                 <div style={{"marginBottom" : "20px", "alignItems":"left"}}>
                                     <Form.Group controlId="textarea">
-                                        <Stack>
-                                            <div>
-                                                <FlexboxGrid.Item as={Col} colspan={16}>
+                                        <Stack direction={isMobile ? 'column' : 'row'} spacing={2} style={{"marginBottom" : "20px", "alignItems":"left"}}>
+                                            <div className='generic-search-control'>
+                                                <FlexboxGrid.Item as={Col} colspan={20}>
                                                     <Form.Control rows={5} name="textarea"/>
                                                 </FlexboxGrid.Item>
                                             </div>
                                             <div>
-                                                <FlexboxGrid.Item as={Col} colspan={6}>
+                                                <FlexboxGrid.Item as={Col} colspan={4}>
                                                     {/* <ButtonToolbar> */}
                                                         <Button appearance="primary" type="submit">Search</Button>
                                                     {/* </ButtonToolbar>                                                         */}

@@ -6,22 +6,59 @@
 .generic-search-container {
     display: flex;
     flex-wrap: wrap;
-    flex-direction: column;
-    overflow: auto;    
+    flex-direction: row;
+    overflow: auto;
 }
 
+/* Adjustments for Desktop Layout */
 .generic-search-panel {
-    min-width: 500px;
-    flex: 0 0 100%;
+    flex: 0 1 40%; /* Takes up half the container on larger screens */
     height: 200px;
-    align-items: left;
+    align-items: flex-start;
+    margin: 10px;
+    width: 30vw;
 }
 
 .generic-search-results-panel {
-    min-width: 800px;    
-    flex: 0 0 100%;
+    flex: 0 1 60%; /* Takes up half the container on larger screens */
     height: 200px;
     overflow: auto;
+    margin: 10px;
+    width: 50vw;
+}
+
+/* Responsive Layout for Mobile */
+@media only screen and (max-width: 768px) {
+    .generic-search-container {
+        flex-direction: column;
+    }
+
+    .generic-search-panel, .generic-search-results-panel {
+        flex: 0 1 100%; /* Take full width on smaller screens */
+        width: 65vw; /* Ensure full width on mobile */
+        height: auto; /* Adjust height for content on mobile */
+    } 
+}
+
+/* Responsive Layout for larger screens */
+@media only screen and (min-width: 768px) {
+    .generic-search-container {
+        flex-direction: column;
+    }
+
+    .generic-search-panel, .generic-search-results-panel {
+        flex: 0 1 100%; /* Take full width on smaller screens */
+        /* width: 60vw; Ensure full width on mobile */        
+        height: auto; /* Adjust height for content on mobile */
+    }
+
+    /* .generic-search-panel{
+        width: fit-content;
+    } */
+}
+
+.generic-search-control {
+    flex: 0 1 100%;
 }
 
 .generic-search-container-description{
