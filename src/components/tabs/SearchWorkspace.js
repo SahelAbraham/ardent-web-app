@@ -10,7 +10,7 @@ import GenericClinicalTrialsSearch from '../search/GenericClinicalTrialsSearch'
 import { addClinicalTrialDetails,  resetClinicalTrialDetails } from '../../reducer/SearchClinicalTrialsReducer';
 import processed_mock_resp from '../../mockData/ctdetails.json'
 import GenericSearch from '../search/GenericSearch';
-import '../Description.css'
+import '../search/Search.css'
 import { FaAngleDoubleDown, FaArrowAltCircleDown, FaArrowDown } from 'react-icons/fa';
 
 export default function SearchWorkspace() {
@@ -114,7 +114,7 @@ export default function SearchWorkspace() {
           </Sidebar> */}
           <Content>
               <div>
-                <div className='description-container'>
+                <div className='generic-search-container-description'>
                     <h4>Try a Rare Disease Search</h4>
                     <p>A Rare Disease? A definition is hard to pin down - in the United States, a disease that affects fewer than 200,000 people at any given time is considered a rare disease whereas the European Union considers a disease rare if it affects no more than 50 per 100,000 people. A disease can be rare in one region, but common in another. 
                     There are around 7,000 rare diseases, and an estimated 25–30 million Americans who suffer from one. However, worldwide that estimate goes up to over 300 million people. Rare diseases can be caused by changes in a person's genes or chromosomes, an infection or immune response but the cause is unknown for many diseases. 
@@ -122,7 +122,7 @@ export default function SearchWorkspace() {
                     <p>For individuals as well as families living with rare diseases, information is but the first step of a difficult and often lonely journey.</p>
                     <p>Our point of view, having experienced the pain, confusion and apprehensiveness of such a journey is to provide the most relevant and up to date information about everything you need to make informed decisions about your next steps.</p>
                 </div>
-              <div className='description-container'>
+              <div className='generic-search-container-description'>
                 <Panel header="Learn about a specific rare disease - causes, symptoms and progress to a cure" shaded>
                   <GenericSearch/>
                 </Panel>                
@@ -130,7 +130,7 @@ export default function SearchWorkspace() {
             </div>
 
             <div>
-              <div className='description-container'>
+              <div className='generic-search-container-description'>
                 <h4>Clinical Trials for Rare Diseases</h4>
                 <p>Clinical trials are research studies that test new medical interventions or make observations on people to determine if they are safe and effective. They are a key part of medical advances 
                   and are used to develop new ways to prevent, detect, or treat disease</p>
@@ -138,7 +138,7 @@ export default function SearchWorkspace() {
                   Studying rare diseases is challenging. Participant pools are small and restricted by rigid inclusion and exclusion criteria. There is often incomplete understanding of genotype–phenotype relationships. The below search will retrieved
                   clinical trials for your particular rare disease</p>
               </div>
-              <div className='description-container'>
+              <div className='generic-search-container-description'>
                 <Panel header="Search for clinical trials that are recruiting for finding cures to Rare Diseases. " shaded>
                   <GenericClinicalTrialsSearch/>
                   <Panel header="Clinical Trials information (Recruiting only)" shaded>

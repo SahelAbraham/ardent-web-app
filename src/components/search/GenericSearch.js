@@ -93,7 +93,7 @@ function GenericSearch(){
                                     onSubmit={fetchSearchResults}>
                                 <div style={{"marginBottom" : "20px", "alignItems":"left"}}>
                                     <Form.Group controlId="textarea">
-                                        <HStack>
+                                        <Stack>
                                             <div>
                                                 <FlexboxGrid.Item as={Col} colspan={16}>
                                                     <Form.Control rows={5} name="textarea"/>
@@ -106,7 +106,7 @@ function GenericSearch(){
                                                     {/* </ButtonToolbar>                                                         */}
                                                 </FlexboxGrid.Item>
                                             </div>
-                                        </HStack>
+                                        </Stack>
                                     </Form.Group>
                                 </div>
                             </Form>
