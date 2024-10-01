@@ -91,12 +91,14 @@ function GenericClinicalTrialsSearch({timelineData, timelineNodeIconArray}){
                     description: "string",
                     prompt: hardPrompt,
                     query: resolvedQuestion,
-                    llm: "string"
+                    llm: "string",
+                    trialRecruitingStatus : "RECRUITING",
+                    maxTrials : 1000
                 }
                 const headers = {
                     "Content-Type": "application/json",
                 };
-                axios.post(ARDENT_WEB_APP_URL + "/services/clinical_trials/", data, {headers})
+                axios.post(ARDENT_WEB_APP_URL + "/services/clinical_trials/params", data, {headers})
                 .then(response => {
                     console.log(response.data);
                     if(parseInt(response.status)===200){
