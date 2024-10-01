@@ -4,6 +4,7 @@
   "private": false,
   "dependencies": {
     "@google-cloud/secret-manager": "^5.6.0",
+    "@gsap/react": "^2.1.1",
     "@reduxjs/toolkit": "^2.2.7",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
@@ -11,6 +12,7 @@
     "axios": "^1.7.5",
     "env-cmd": "^10.1.0",
     "firebase": "^10.13.1",
+    "gsap": "^3.12.5",
     "jslint": "^0.12.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
@@ -21,6 +23,7 @@
     "react-toastify": "^10.0.5",
     "react-youtube": "^10.1.0",
     "rsuite": "^5.70.0",
+    "vis-timeline": "^7.7.3",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
