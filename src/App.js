@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 import Home from './components/tabs/Home'
 import About from './components/tabs/About';
 import SearchWorkspace from './components/tabs/SearchWorkspace';
+import Workspace from './components/tabs/Workspace';
 import Login from './components/login/Login';
 import {React, useState, useEffect} from 'react'
 import axios from 'axios';
@@ -93,7 +94,7 @@ function App() {
         <Routes>
           <Route path='/' exact element={<Home/>}/>
           <Route path='/about' exact element={<About/>}/>
-          <Route path='/workspace' exact element={<SearchWorkspace/>}/>
+          <Route path='/workspace' exact element={<Workspace/>}/>
           <Route path='/signin' exact element={<Login/>}/>
         </Routes>
       </Router>

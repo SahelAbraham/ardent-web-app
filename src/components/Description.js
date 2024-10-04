@@ -51,7 +51,7 @@ function Description() {
                 </Panel>
                 <Panel>
                   <div className='description-text'>
-                    <p>View our submission for the <a href="https://ai.google.dev/competition">Gemini API</a> competition.</p>
+                    <p>View our submission for the <a href="https://ai.google.dev/competition"> Gemini API </a> competition.</p>
                   </div>          
                 </Panel>        
                 <Panel style={{margin : "20px"}}>

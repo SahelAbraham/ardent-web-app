@@ -1,0 +1,65 @@
+import { Sidenav, Nav, Toggle } from 'rsuite';
+import DashboardIcon from '@rsuite/icons/legacy/Dashboard';
+import GroupIcon from '@rsuite/icons/legacy/Group';
+import MagicIcon from '@rsuite/icons/legacy/Magic';
+import GearCircleIcon from '@rsuite/icons/legacy/GearCircle';
+import TagIcon from '@rsuite/icons/Tag';
+import TextImageIcon from '@rsuite/icons/TextImage';
+import {React, useState, useEffect} from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { IoVolumeHigh } from "react-icons/io5";
+import SpeakerIcon from '@rsuite/icons/Speaker';
+import SendIcon from '@rsuite/icons/Send';
+import PeopleBranchIcon from '@rsuite/icons/PeopleBranch';
+import WechatOutlineIcon from '@rsuite/icons/WechatOutline';
+import PeoplesIcon from '@rsuite/icons/Peoples';
+import GlobalIcon from '@rsuite/icons/Global';
+import { Link } from 'react-router-dom';
+
+export default function Workspace(){
+  const [expanded, setExpanded] = useState(true);
+  const [activeKey, setActiveKey] = useState('1');
+  return (
+    <div style={{ width: 240 }}>
+      <Sidenav expanded={expanded} defaultOpenKeys={['1', '5']}>
+        <Sidenav.Body>
+          <Nav activeKey={activeKey} onSelect={setActiveKey}>
+            <Nav.Menu placement="rightStart" eventKey="1" title="Setup" icon={<MagicIcon />}>
+              <Nav.Item as={Link} to="/workspace/setup/rare_diseases" eventKey="1-1">Rare Diseases</Nav.Item>
+              <Nav.Item as={Link} to="/setup/clinical_trials" eventKey="1-2">Clinical Trials</Nav.Item>
+              <Nav.Item as={Link} to="/setup/medical_research" eventKey="1-3">Medical Research</Nav.Item>
+            </Nav.Menu>            
+            <Nav.Item as={Link} to="/latest" eventKey="2" icon={<SpeakerIcon />}>
+              Latest Developments
+            </Nav.Item>
+            <Nav.Item as={Link} to="/bookmarks" eventKey="3" icon={<TagIcon />}>
+              Bookmarks
+            </Nav.Item>            
+            <Nav.Item as={Link} to="/community" eventKey="4" icon={<PeoplesIcon />}>
+              Community
+            </Nav.Item>
+            <Nav.Item as={Link} to="/companies" eventKey="5" icon={<PeoplesIcon />}>
+              Companies
+            </Nav.Item>            
+            <Nav.Menu
+              placement="leftStart"
+              eventKey="6"
+              title="Agencies"
+              icon={<GlobalIcon />}
+            >
+              <Nav.Item as={Link} to="/agencies/fda" eventKey="6-1">FDA</Nav.Item>
+              <Nav.Item as={Link} to="/agencies/ae" eventKey="6-2">Adverse Events</Nav.Item>
+            </Nav.Menu>
+            <Nav.Item as={Link} to="/events" eventKey="7" icon={<PeopleBranchIcon />}>
+              Events
+            </Nav.Item>
+            <Nav.Item as={Link} to="/contact" eventKey="8" icon={<WechatOutlineIcon />}>
+              Get in Touch
+            </Nav.Item>            
+          </Nav>
+        </Sidenav.Body>
+        <Sidenav.Toggle onToggle={expanded => setExpanded(expanded)} />
+      </Sidenav>
+    </div>
+  );
+};
