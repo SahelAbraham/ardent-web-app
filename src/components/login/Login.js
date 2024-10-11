@@ -3,31 +3,13 @@ import { Modal, Button, Loader, Panel, PanelGroup, FlexboxGrid, ButtonToolbar, C
 import React, {useEffect, useState} from 'react';
 import { SchemaModel, StringType } from "schema-typed"
 // Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
+// import { initializeApp } from "firebase/app";
+// import { getAnalytics } from "firebase/analytics";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, sendPasswordResetEmail } from "firebase/auth";
 import { useDispatch } from 'react-redux'
 import { setNotifcation, resetNotification } from "../../reducer/NotificationReducer"
 
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
-
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
-const firebaseConfig = {
-  apiKey: "AIzaSyC52WQXzt2OXxI7m8UKHVMyA5nM39XAL08",
-  authDomain: "ardent-e9b04.firebaseapp.com",
-  projectId: "ardent-e9b04",
-  storageBucket: "ardent-e9b04.appspot.com",
-  messagingSenderId: "296117935772",
-  appId: "1:296117935772:web:c532b91c650a99e8c95759",
-  measurementId: "G-XJBF9LNV6J"
-};
-
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
-
+import { app } from '../../firebase/firebase';
 
 function Login() {    
     const handleOpen = () => setOpen(true);

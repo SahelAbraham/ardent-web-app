@@ -1,16 +1,15 @@
-import {React, useState, useEffect} from 'react'
+import {React, useState, useEffect, forwardRef} from 'react'
 import {Link} from 'react-router-dom'
 import {TrySearchButton} from './TrySearchButton'
 import './Navbar.css'
 import Login from './login/Login'
-import MobileApp from './mobileApp/MobileApp'
+import SubscribeEmail from './subscribe/SubscribeEmail'
 
-import { Button, ButtonToolbar, Modal, Placeholder } from 'rsuite';
 
 function Navbar() {
   const [click, setClick] = useState(false)
   const [button, setButton] = useState(true)
-
+  
   const handleClick = () => setClick(!click)
   const closeMobileMenu = () => setClick(false)
 
@@ -27,7 +26,7 @@ function Navbar() {
   }, [])
 
   window.addEventListener('resize', showButton)
-  
+
   return (
     <>
       <nav className="navbar">
@@ -53,7 +52,12 @@ function Navbar() {
                 <Link to='/about' className='nav-links' onClick={closeMobileMenu}>
                   About
                 </Link>
-              </li>              
+              </li>
+              <li className='nav-item'>
+                <div className='nav-links'>
+                  <SubscribeEmail/>
+                </div>                
+              </li>                            
               <li className='nav-item'>
                 <div className='nav-links'>
                   <Login/>

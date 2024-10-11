@@ -1,11 +1,12 @@
 import React, {useState, useEffect} from 'react';
-import { useMediaQuery, Loader, Button, Col, Stack, HStack } from 'rsuite';
+import { useMediaQuery, Loader, IconButton, Col, Stack, HStack } from 'rsuite';
 import { Form, ButtonToolbar, FlexboxGrid, PanelGroup, Panel, Placeholder } from 'rsuite';
 import { SchemaModel, StringType } from "schema-typed"
 import axios from 'axios';
 import { useSelector, useDispatch } from 'react-redux'
 import { addSearchResult, resetSearchResult } from "../../reducer/SearchPubmedArticlesReducer"
 import './Search.css'
+import SearchIcon from '@rsuite/icons/Search';
 
 function GenericSearch(){
     const [isMobile] = useMediaQuery('(max-width: 700px)');
@@ -103,7 +104,7 @@ function GenericSearch(){
                                             <div>
                                                 <FlexboxGrid.Item as={Col} colspan={4}>
                                                     {/* <ButtonToolbar> */}
-                                                        <Button appearance="primary" type="submit">Search</Button>
+                                                        <IconButton appearance="primary" type="submit" icon={<SearchIcon />}>Search</IconButton>
                                                     {/* </ButtonToolbar>                                                         */}
                                                 </FlexboxGrid.Item>
                                             </div>

@@ -170,6 +170,7 @@ function GenericClinicalTrialsSearch({timelineData, timelineNodeIconArray}){
                         data={rareDiseaseList.map(
                           entry => {return entry ? {'label':entry[1], 'value':entry[1]} : {'label':'', 'value':''}})} block
                           onSelect={(val, item, evt) => handleClinicalTrialsSearchWorkspaceChange("rdSelector", val, evt)}
+                          virtualized
                           // onChange={(val, evt)=>{
                           //   handleClinicalTrialsSearchWorkspaceChange(val, evt)
                           // }}
