@@ -1,5 +1,5 @@
 import '../../App.css'
-import { Modal, Button, Loader, Panel, PanelGroup, FlexboxGrid, ButtonToolbar, Col, Form, Notification, useToaster } from 'rsuite';
+import { useMediaQuery, Stack, Modal, Button, Loader, Panel, PanelGroup, FlexboxGrid, ButtonToolbar, Col, Form, Notification, useToaster } from 'rsuite';
 import React, {useEffect, useState} from 'react';
 import { SchemaModel, StringType } from "schema-typed"
 // Import the functions you need from the SDKs you need
@@ -8,10 +8,11 @@ import { SchemaModel, StringType } from "schema-typed"
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, sendPasswordResetEmail } from "firebase/auth";
 import { useDispatch } from 'react-redux'
 import { setNotifcation, resetNotification } from "../../reducer/NotificationReducer"
-
 import { app } from '../../firebase/firebase';
+import './Login.css'
 
-function Login() {    
+function Login() {
+    const [isMobile] = useMediaQuery('(max-width: 700px)');
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false); 
     const [isLoading, setIsLoading] = useState(false);
@@ -141,79 +142,81 @@ function Login() {
 
             <Modal open={open} onClose={handleClose} size={'lg'}>
                 <Modal.Header>
-                    <Modal.Title>Authentication</Modal.Title>
+                    <Modal.Title>Sign In / Up</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <div style={{'margin':'10px'}}>
                         <PanelGroup>
-                            <FlexboxGrid justify="space-between">
-                                <FlexboxGrid.Item as={Col} colspan={12}>
-                                    <h2>Sign In</h2>
-                                    {isLoading ? <Loader  backdrop size="md" content="Authenticating..." /> : ''}
-                                    <Panel shaded>
-                                        <Form ref={signInFormRef}
-                                            model={signInModel}
-                                            onChange={updateSignInFormValues}
-                                            onSubmit={signInUserWithEmail}>
-                                            <Form.Group controlId="signin_email">
-                                                <Form.ControlLabel>Email</Form.ControlLabel>
-                                                <Form.Control name="signin_email" type="email" />
-                                                <Form.HelpText tooltip>Email is required</Form.HelpText>
-                                            </Form.Group>
-                                            <Form.Group controlId="signin_password">
-                                                <Form.ControlLabel>Password</Form.ControlLabel>
-                                                <Form.Control name="signin_password" type="password" autoComplete="off" />
-                                            </Form.Group>
-                                            <Form.Group>
-                                            <ButtonToolbar className=''>
-                                                <Button appearance="primary" type="submit">Submit</Button>
-                                                <Button appearance="default">Cancel</Button>
-                                                <a href="#" onClick={(event)=> resetPassword(event)}>Reset password</a>
-                                            </ButtonToolbar>                                            
-                                            </Form.Group>
-                                        </Form>                                        
-                                    </Panel>
-                                </FlexboxGrid.Item>
-                                <FlexboxGrid.Item as={Col} colspan={12}>
-                                    <h2>Sign Up</h2>
-                                    {isLoading ? <Loader  backdrop size="md" content="Signing in..." /> : ''}
-                                    <Panel shaded>
-                                        <Form ref={signUpFormRef}
-                                            model={signUpModel}
-                                            onSubmit={signUpUserWithEmail}>
-                                            <Form.Group controlId="signup_fname">
-                                                <Form.ControlLabel>First Name</Form.ControlLabel>
-                                                <Form.Control name="signup_fname"/>
-                                                <Form.HelpText tooltip>Enter First Name</Form.HelpText>
-                                            </Form.Group>
-                                            <Form.Group controlId="signup_lname">
-                                                <Form.ControlLabel>Last Name</Form.ControlLabel>
-                                                <Form.Control name="signup_lname"/>
-                                                <Form.HelpText tooltip>Enter Last Name</Form.HelpText>
-                                            </Form.Group>                                            
-                                            <Form.Group controlId="signup_email">
-                                                <Form.ControlLabel>Email</Form.ControlLabel>
-                                                <Form.Control name="signup_email" type="email" />
-                                                <Form.HelpText tooltip>Email is required</Form.HelpText>
-                                            </Form.Group>
-                                            <Form.Group controlId="signup_password">
-                                                <Form.ControlLabel>Password</Form.ControlLabel>
-                                                <Form.Control name="signup_password" type="password" autoComplete="off" />
-                                            </Form.Group>
-                                            <Form.Group controlId="signup_repassword">
-                                                <Form.ControlLabel>Re-enter Password</Form.ControlLabel>
-                                                <Form.Control name="signup_repassword" type="password" autoComplete="off" />
-                                                <Form.HelpText tooltip>Passwords should match</Form.HelpText>
-                                            </Form.Group>                                            
-                                            <Form.Group>
-                                            <ButtonToolbar>
-                                                <Button appearance="primary" type="submit">Submit</Button>
-                                                <Button appearance="default">Cancel</Button>
-                                            </ButtonToolbar>
-                                            </Form.Group>
-                                        </Form>                                        
-                                    </Panel>  
-                                </FlexboxGrid.Item>            
+                            <FlexboxGrid className='generic-login-container'>
+                                <Stack direction={isMobile ? 'column' : 'row'} spacing={2} style={{"marginBottom" : "20px", "alignItems":"left"}}>
+                                    <FlexboxGrid.Item as={Col} colspan={12}>
+                                        <h2>Sign In</h2>
+                                        {isLoading ? <Loader  backdrop size="md" content="Authenticating..." /> : ''}
+                                        <Panel className='generic-signin-panel' bordered shaded>
+                                            <Form ref={signInFormRef}
+                                                model={signInModel}
+                                                onChange={updateSignInFormValues}
+                                                onSubmit={signInUserWithEmail}>
+                                                <Form.Group controlId="signin_email">
+                                                    <Form.ControlLabel>Email</Form.ControlLabel>
+                                                    <Form.Control name="signin_email" type="email" />
+                                                    <Form.HelpText tooltip>Email is required</Form.HelpText>
+                                                </Form.Group>
+                                                <Form.Group controlId="signin_password">
+                                                    <Form.ControlLabel>Password</Form.ControlLabel>
+                                                    <Form.Control name="signin_password" type="password" autoComplete="off" />
+                                                </Form.Group>
+                                                <Form.Group>
+                                                <ButtonToolbar className=''>
+                                                    <Button appearance="primary" type="submit">Submit</Button>
+                                                    <Button appearance="default">Cancel</Button>
+                                                    <a href="#" onClick={(event)=> resetPassword(event)}>Reset password</a>
+                                                </ButtonToolbar>                                            
+                                                </Form.Group>
+                                            </Form>                                        
+                                        </Panel>
+                                    </FlexboxGrid.Item>
+                                    <FlexboxGrid.Item as={Col} colspan={12}>
+                                        <h2>Sign Up</h2>
+                                        {isLoading ? <Loader  backdrop size="md" content="Signing in..." /> : ''}
+                                        <Panel className='generic-signup-panel' bordered shaded>
+                                            <Form ref={signUpFormRef}
+                                                model={signUpModel}
+                                                onSubmit={signUpUserWithEmail}>
+                                                <Form.Group controlId="signup_fname">
+                                                    <Form.ControlLabel>First Name</Form.ControlLabel>
+                                                    <Form.Control name="signup_fname"/>
+                                                    <Form.HelpText tooltip>Enter First Name</Form.HelpText>
+                                                </Form.Group>
+                                                <Form.Group controlId="signup_lname">
+                                                    <Form.ControlLabel>Last Name</Form.ControlLabel>
+                                                    <Form.Control name="signup_lname"/>
+                                                    <Form.HelpText tooltip>Enter Last Name</Form.HelpText>
+                                                </Form.Group>                                            
+                                                <Form.Group controlId="signup_email">
+                                                    <Form.ControlLabel>Email</Form.ControlLabel>
+                                                    <Form.Control name="signup_email" type="email" />
+                                                    <Form.HelpText tooltip>Email is required</Form.HelpText>
+                                                </Form.Group>
+                                                <Form.Group controlId="signup_password">
+                                                    <Form.ControlLabel>Password</Form.ControlLabel>
+                                                    <Form.Control name="signup_password" type="password" autoComplete="off" />
+                                                </Form.Group>
+                                                <Form.Group controlId="signup_repassword">
+                                                    <Form.ControlLabel>Re-enter Password</Form.ControlLabel>
+                                                    <Form.Control name="signup_repassword" type="password" autoComplete="off" />
+                                                    <Form.HelpText tooltip>Passwords should match</Form.HelpText>
+                                                </Form.Group>                                            
+                                                <Form.Group>
+                                                <ButtonToolbar>
+                                                    <Button appearance="primary" type="submit">Submit</Button>
+                                                    <Button appearance="default">Cancel</Button>
+                                                </ButtonToolbar>
+                                                </Form.Group>
+                                            </Form>                                        
+                                        </Panel>  
+                                    </FlexboxGrid.Item>
+                                </Stack>
                             </FlexboxGrid>
                         </PanelGroup>
                     </div>

@@ -1,0 +1,45 @@
+.generic-login-container {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    overflow: auto;
+}
+
+/* Adjustments for mobile Layout */
+@media only screen and (max-width: 768px) {
+    .generic-signin-panel {
+        flex: 0 1 40%; /* Takes up half the container on larger screens */
+        height: 300px;
+        align-items: flex-start;
+        margin: 10px;
+        width: 80vw;
+        margin-bottom: 30px;
+    }
+
+    .generic-signup-panel {
+        flex: 0 1 60%; /* Takes up half the container on larger screens */
+        height: 600px;
+        overflow: auto;
+        margin: 10px;
+        width: 80vw;
+    }
+}
+
+/* Adjustments for Larger screen Layout */
+@media only screen and (min-width: 768px) {
+    .generic-signin-panel {
+        flex: 0 1 40%; /* Takes up half the container on larger screens */
+        height: 500px;
+        align-items: flex-start;
+        margin: 10px;
+        width: 20vw;
+    }
+
+    .generic-signup-panel {
+        flex: 0 1 60%; /* Takes up half the container on larger screens */
+        height: 500px;
+        overflow: auto;
+        margin: 10px;
+        width: 20vw;
+    }
+}
