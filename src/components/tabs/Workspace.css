@@ -1,11 +1,11 @@
-.flex-container {
+.flex-workspace-container {
   display: flex;
 }
 
-.flex-child {
+.flex-workspace-child-left {
   flex: 1;  
 }  
 
-.flex-child:first-child {
+.flex-workspace-child-right {
   margin-right: 20px;
 } 

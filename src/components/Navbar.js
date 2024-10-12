@@ -44,7 +44,7 @@ function Navbar() {
                 </Link>
               </li>
               <li className='nav-item'>
-                <Link to='/workspace' className='nav-links' onClick={closeMobileMenu}>
+                <Link to='/tabs/search-workspace' className='nav-links' onClick={closeMobileMenu}>
                   Try it Out
                 </Link>
               </li>

@@ -15,6 +15,17 @@ import processed_mock_resp from './mockData/ctgardlist.json'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Link } from "react-router-dom";
+import RareDiseases from './components/workspace/setup/rare_diseases/RareDiseases'
+import ClinicalTrials from './components/workspace/setup/clinical_trials/ClinicalTrials'
+import MedicalResearch from './components/workspace/setup/medical_research/MedicalResearch'
+import LatestDevelopments from './components/workspace/latest_developments/LatestDevelopments'
+import Bookmarks  from './components/workspace/bookmarks/Bookmarks'
+import Community from './components/workspace/community/Community'
+import Companies from './components/workspace/companies/Companies'
+import Fda from './components/workspace/agencies/fda/Fda'
+import Ae from './components/workspace/agencies/ae/Ae'
+import Events from './components/workspace/events/Events'
+import Contact from './components/workspace/contact/Contact'
 
 const CustomToastWithLink = () => (
   <div style={{textAlign:"center"}}>    
@@ -95,6 +106,21 @@ function App() {
           <Route path='/' exact element={<Home/>}/>
           <Route path='/about' exact element={<About/>}/>
           <Route path='/workspace' exact element={<Workspace/>}/>
+
+          <Route path='/workspace/setup/rare_diseases' exact element={<RareDiseases/>}/>
+          <Route path='/workspace/setup/clinical_trials' exact element={<ClinicalTrials/>}/>
+          <Route path='/workspace/setup/medical_research' exact element={<MedicalResearch/>}/>
+          <Route path='/workspace/latest_developments' exact element={<LatestDevelopments/>}/>
+          <Route path='/workspace/bookmarks' exact element={<Bookmarks/>}/>
+          <Route path='/workspace/community' exact element={<Community/>}/>
+          <Route path='/workspace/companies' exact element={<Companies/>}/>
+          <Route path='/workspace/agencies/fda' exact element={<Fda/>}/>
+          <Route path='/workspace/agencies/ae' exact element={<Ae/>}/>
+          <Route path='/workspace/events' exact element={<Events/>}/>
+          <Route path='/workspace/contact' exact element={<Contact/>}/>
+
+          <Route path='/tabs/search-workspace' exact element={<SearchWorkspace/>}/>
+
           <Route path='/signin' exact element={<Login/>}/>
         </Routes>
       </Router>

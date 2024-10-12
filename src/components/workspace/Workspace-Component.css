@@ -1,0 +1,14 @@
+.flex-container {
+  display: flex;
+}
+
+.flex-child-left {
+  margin-right: 20px;
+  max-width: 240px;  
+} 
+
+.flex-child-right {
+  flex: 1 0;  
+  width:100%;
+  flex-grow: 1;
+}  
