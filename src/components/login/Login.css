@@ -16,6 +16,10 @@
         margin-bottom: 30px;
     }
 
+    .generic-login-grid-container {
+        width: 100% !important;        
+    }
+
     .generic-signup-panel {
         flex: 0 1 60%; /* Takes up half the container on larger screens */
         height: 600px;
@@ -33,6 +37,10 @@
         align-items: flex-start;
         margin: 10px;
         width: 20vw;
+    }
+
+    .generic-login-grid-container {
+        width: 50% !important;
     }
 
     .generic-signup-panel {

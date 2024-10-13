@@ -149,7 +149,7 @@ function Login() {
                         <PanelGroup>
                             <FlexboxGrid className='generic-login-container'>
                                 <Stack direction={isMobile ? 'column' : 'row'} spacing={2} style={{"marginBottom" : "20px", "alignItems":"left"}}>
-                                    <FlexboxGrid.Item as={Col} colspan={12}>
+                                    <FlexboxGrid.Item className='generic-login-grid-container'>
                                         <h2>Sign In</h2>
                                         {isLoading ? <Loader  backdrop size="md" content="Authenticating..." /> : ''}
                                         <Panel className='generic-signin-panel' bordered shaded>
@@ -176,7 +176,7 @@ function Login() {
                                             </Form>                                        
                                         </Panel>
                                     </FlexboxGrid.Item>
-                                    <FlexboxGrid.Item as={Col} colspan={12}>
+                                    <FlexboxGrid.Item className='generic-login-grid-container'>
                                         <h2>Sign Up</h2>
                                         {isLoading ? <Loader  backdrop size="md" content="Signing in..." /> : ''}
                                         <Panel className='generic-signup-panel' bordered shaded>
