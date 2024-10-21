@@ -35,12 +35,29 @@ export default function SearchWorkspace() {
           displayObject[key]["answer"] = []
           if(value.constructor === Object){
               for(const subEntry in value.answer){
-                displayObject[key]["answer"].push(value.answer[subEntry])
+                if(subEntry==='incl_list')
+                  displayObject[key]["answer"].push(value.answer[subEntry])
               }
           }
       }
       return displayObject
   }
+
+  // const extractSearchResults = () => {
+  //   let displayObject = {}
+  //   for(const [key, value] of Object.entries(searchCTDiseaseResultsDisplay)){
+  //       displayObject = {}
+  //       displayObject["question"] = value.question
+  //       displayObject["answer"] = []
+  //       if(value.constructor === Object){
+  //           for(const subEntry in value.answer){
+  //             if(subEntry==='incl_list')
+  //               displayObject["answer"].push(value.answer[subEntry])
+  //           }
+  //       }
+  //   }
+  //   return displayObject
+  // }
 
   const extractClinicalTrialsDetails = (nctId) => {
     let displayObject = {}
@@ -119,7 +136,7 @@ export default function SearchWorkspace() {
                 <div>
                   <div className='generic-search-container-description'>
                       <h4>Try a Rare Disease Search</h4>
-                      <h6>A Rare Disease? A definition is hard to pin down - in the United States, a disease that affects fewer than 200,000 people at any given time is considered a rare disease whereas the European Union considers a disease rare if it affects no more than 50 per 100,000 people. A disease can be rare in one region, but common in another. 
+                      <h6>A Rare Disease definition is hard to pin down. In the United States, a disease that affects fewer than 200,000 people at any given time is considered a rare disease whereas the European Union considers a disease rare if it affects no more than 50 per 100,000 people. A disease can be rare in one region, but common in another. 
                       There are around 7,000 rare diseases, and an estimated 25–30 million Americans who suffer from one. However, worldwide that estimate goes up to over 300 million people. Rare diseases can be caused by changes in a person's genes or chromosomes, an infection or immune response but the cause is unknown for many diseases. 
                       Some rare diseases affect a specific body system, while others can cause cancer.</h6>
                       <h6>For individuals as well as families living with rare diseases, information is but the first step of a difficult and often lonely journey.</h6>
@@ -154,27 +171,29 @@ export default function SearchWorkspace() {
                           <div>
                             <Accordion bordered>
                               {Object.entries(searchCTDiseaseDisplay).map(([key, value]) => {
-                                return (value !== null && value.answer != null) ? 
+                                return ((value !== null && value.answer != null) ? 
                                   <Accordion.Panel header={`Question: ${value.question}`} shaded caretAs={FaArrowDown}>  
-                                    {value.answer.map((mapValue, mapKey) => (
-                                      <Accordion.Panel defaultExpanded header={`NCT ID: ${mapValue.nct_id} - ${mapValue.brief_title}`} key={mapKey} caretAs={FaArrowDown}>
-                                        <p>{`Study Title: ${mapValue.official_title}`}</p>                                
-                                        {clinicalTrialsDetailsFlag.indexOf(mapValue.nct_id) > -1 ? 
-                                          <Panel header={`Details for ${mapValue.nct_id}`} shaded>
-                                              <p>Trial phase : {(Object.keys(searchCTDetailsDisplay).length <= 1) ? "Data not available" : (mapValue.nct_id !== searchCTDetailsDisplay["details"]["clinical_trial_studies_info"]["nct_id"] ? "Data not available" : searchCTDetailsDisplay["details"]["clinical_trial_studies_info"]["phase"])}</p>
-                                              <p>Trial study type : {(Object.keys(searchCTDetailsDisplay).length <= 1) ? "Data not available" : (mapValue.nct_id !== searchCTDetailsDisplay["details"]["clinical_trial_studies_info"]["nct_id"] ? "Data not available" :  searchCTDetailsDisplay["details"]["clinical_trial_studies_info"]["study_type"])}</p>
-                                              <p>Trial sponsor/lead : {(Object.keys(searchCTDetailsDisplay).length <= 1) ? "Data not available" : (mapValue.nct_id !== searchCTDetailsDisplay["details"]["clinical_trial_studies_sponsors"]["nct_id"] ? "Data not available" : searchCTDetailsDisplay["details"]["clinical_trial_studies_sponsors"]["name"])}</p>
-                                              <p>Trial status : {(Object.keys(searchCTDetailsDisplay).length <= 1) ? "Data not available" : (mapValue.nct_id !== searchCTDetailsDisplay["details"]["clinical_trial_studies_info"]["nct_id"] ? "Data not available" : searchCTDetailsDisplay["details"]["clinical_trial_studies_info"]["overall_status"])}</p>
-                                              <p>Trial enrollment : {(Object.keys(searchCTDetailsDisplay).length <= 1) ? "Data not available" : (mapValue.nct_id !== searchCTDetailsDisplay["details"]["clinical_trial_studies_info"]["nct_id"] ? "Data not available" : searchCTDetailsDisplay["details"]["clinical_trial_studies_info"]["enrollment"])}</p>
-                                              <p>Trial start date: {(Object.keys(searchCTDetailsDisplay).length <= 1) ? "Data not available" : (mapValue.nct_id !== searchCTDetailsDisplay["details"]["clinical_trial_studies_info"]["nct_id"] ? "Data not available" : new Date(searchCTDetailsDisplay["details"]["clinical_trial_studies_info"]["created_at"]).toLocaleDateString('en-US'))}</p>
-                                              <p>Trial completion date (expected/estimated): {(Object.keys(searchCTDetailsDisplay).length <= 1) ? "Data not available" : (mapValue.nct_id !== searchCTDetailsDisplay["details"]["clinical_trial_studies_info"]["nct_id"] ? "Data not available" : new Date(searchCTDetailsDisplay["details"]["clinical_trial_studies_info"]["completion_date"]).toLocaleDateString('en-US'))}</p>
-                                            </Panel> :
-                                            ctDetailsLoading ? <Button appearance="ghost" loading>Get more details</Button> : <Button appearance="ghost" onClick={() => fetchCTDetailsByNCT(mapValue.nct_id)}>Get more details</Button>
-                                        }
-                                      </Accordion.Panel>
-                                    ))} 
+                                    {value.answer.map((mapValue, mapKey) => (                                      
+                                      Object.keys(mapValue).length > 0 && mapValue !== null ?
+                                        Object.values(mapValue).map((entry, entryIdx) => (
+                                          <Accordion.Panel defaultExpanded header={`NCT ID: ${entry.nct_id} - ${entry.brief_title}`} key={entryIdx} caretAs={FaArrowDown}>
+                                            <p>{`Study Title: ${entry.official_title}`}</p>                                
+                                            {clinicalTrialsDetailsFlag.indexOf(entry.nct_id) > -1 ? 
+                                              <Panel header={`Details for ${entry.nct_id}`} shaded>
+                                                  <p>Trial phase : {(Object.keys(searchCTDetailsDisplay).length <= 1) ? "Data not available" : (entry.nct_id !== searchCTDetailsDisplay["details"]["clinical_trial_studies_info"]["nct_id"] ? "Data not available" : searchCTDetailsDisplay["details"]["clinical_trial_studies_info"]["phase"])}</p>
+                                                  <p>Trial study type : {(Object.keys(searchCTDetailsDisplay).length <= 1) ? "Data not available" : (entry.nct_id !== searchCTDetailsDisplay["details"]["clinical_trial_studies_info"]["nct_id"] ? "Data not available" :  searchCTDetailsDisplay["details"]["clinical_trial_studies_info"]["study_type"])}</p>
+                                                  <p>Trial sponsor/lead : {(Object.keys(searchCTDetailsDisplay).length <= 1) ? "Data not available" : (entry.nct_id !== searchCTDetailsDisplay["details"]["clinical_trial_studies_sponsors"]["nct_id"] ? "Data not available" : searchCTDetailsDisplay["details"]["clinical_trial_studies_sponsors"]["name"])}</p>
+                                                  <p>Trial status : {(Object.keys(searchCTDetailsDisplay).length <= 1) ? "Data not available" : (entry.nct_id !== searchCTDetailsDisplay["details"]["clinical_trial_studies_info"]["nct_id"] ? "Data not available" : searchCTDetailsDisplay["details"]["clinical_trial_studies_info"]["overall_status"])}</p>
+                                                  <p>Trial enrollment : {(Object.keys(searchCTDetailsDisplay).length <= 1) ? "Data not available" : (entry.nct_id !== searchCTDetailsDisplay["details"]["clinical_trial_studies_info"]["nct_id"] ? "Data not available" : searchCTDetailsDisplay["details"]["clinical_trial_studies_info"]["enrollment"])}</p>
+                                                  <p>Trial start date: {(Object.keys(searchCTDetailsDisplay).length <= 1) ? "Data not available" : (entry.nct_id !== searchCTDetailsDisplay["details"]["clinical_trial_studies_info"]["nct_id"] ? "Data not available" : new Date(searchCTDetailsDisplay["details"]["clinical_trial_studies_info"]["created_at"]).toLocaleDateString('en-US'))}</p>
+                                                  <p>Trial completion date (expected/estimated): {(Object.keys(searchCTDetailsDisplay).length <= 1) ? "Data not available" : (entry.nct_id !== searchCTDetailsDisplay["details"]["clinical_trial_studies_info"]["nct_id"] ? "Data not available" : new Date(searchCTDetailsDisplay["details"]["clinical_trial_studies_info"]["completion_date"]).toLocaleDateString('en-US'))}</p>
+                                                </Panel> :
+                                                ctDetailsLoading ? <Button appearance="ghost" loading>Get more details</Button> : <Button appearance="ghost" onClick={() => fetchCTDetailsByNCT(entry.nct_id)}>Get more details</Button>
+                                            }
+                                          </Accordion.Panel>)) : <p>No trials found</p>)
+                                    )} 
                                   </Accordion.Panel>
-                                  : null;
+                                  : <p>No trials found</p>)
                               })}
                             </Accordion>                      
                           </div>}
