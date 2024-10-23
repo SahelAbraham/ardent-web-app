@@ -1,11 +1,14 @@
 .flex-workspace-container {
   display: flex;
+  height: 100vh;
 }
 
 .flex-workspace-child-left {
-  flex: 1;  
+  flex: 0 0 240px;  
 }  
 
-.flex-workspace-child-right {
-  margin-right: 20px;
+.flex-workspace-child-right {  
+  /* width: calc(100% - 240px); */
+  flex: 1 1 auto;
+  /* background-color: red; */
 } 

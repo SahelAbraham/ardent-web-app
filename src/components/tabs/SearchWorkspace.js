@@ -128,10 +128,10 @@ export default function SearchWorkspace() {
         <Header></Header>
         <Container>
           <div className="flex-workspace-container">
-            <div className="flex-workspace-child-left">
+            {/* <div className="flex-workspace-child-left"> */}
               <SideBarNav/>
-            </div>
-            <div className="flex-workspace-child-right">
+            {/* </div> */}
+            {/* <div className="flex-workspace-child-right"> */}
               <Content>
                 <div>
                   <div className='generic-search-container-description'>
@@ -202,7 +202,7 @@ export default function SearchWorkspace() {
                   </div>
                 </div>
               </Content>
-            </div>            
+            {/* </div>             */}
           </div>
           {/* <Sidebar>
             <div className='workspace'>

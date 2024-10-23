@@ -16,19 +16,21 @@ import PeoplesIcon from '@rsuite/icons/Peoples';
 import GlobalIcon from '@rsuite/icons/Global';
 import { Link } from 'react-router-dom';
 import PlayOutlineIcon from '@rsuite/icons/PlayOutline';
+import './SideBarNav.css'
 
-export default function Workspace(){
+export default function SideBarNav(){
   const [expanded, setExpanded] = useState(true);
   const [activeKey, setActiveKey] = useState('1');
   return (
-    <div style={{ width: 240 }}>
+    // <div style={{ width: 300 }}>
+    <div className='sidebar-sidenav'>
       <Sidenav expanded={expanded} defaultOpenKeys={['2', '7']}>
         <Sidenav.Body>
           <Nav activeKey={activeKey} onSelect={setActiveKey}>
             <Nav.Item as={Link} to="../tabs/search-workspace" eventKey="1" icon={<PlayOutlineIcon />}>
               Simple Workspace
             </Nav.Item>
-            {/* <Nav.Menu placement="rightStart" eventKey="2" title="Setup" icon={<MagicIcon />}>
+            <Nav.Menu placement="rightStart" eventKey="2" title="Setup" icon={<MagicIcon />}>
               <Nav.Item as={Link} to="../workspace/setup/rare_diseases" eventKey="2-1">Rare Diseases</Nav.Item>
               <Nav.Item as={Link} to="../workspace/setup/clinical_trials" eventKey="2-2">Clinical Trials</Nav.Item>
               <Nav.Item as={Link} to="../workspace/setup/medical_research" eventKey="2-3">Medical Research</Nav.Item>
@@ -59,7 +61,7 @@ export default function Workspace(){
             </Nav.Item>
             <Nav.Item as={Link} to="../workspace/contact" eventKey="9" icon={<WechatOutlineIcon />}>
               Get in Touch
-            </Nav.Item>             */}
+            </Nav.Item>            
           </Nav>
         </Sidenav.Body>
         <Sidenav.Toggle onToggle={expanded => setExpanded(expanded)} />
