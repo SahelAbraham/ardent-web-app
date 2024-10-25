@@ -26,6 +26,7 @@ import Fda from './components/workspace/agencies/fda/Fda'
 import Ae from './components/workspace/agencies/ae/Ae'
 import Events from './components/workspace/events/Events'
 import Contact from './components/workspace/contact/Contact'
+import PrivateRoute from './components/login/PrivateRoute'; // Import the PrivateRoute
 
 const CustomToastWithLink = () => (
   <div style={{textAlign:"center"}}>    
@@ -89,7 +90,59 @@ function App() {
 
   return (    
     <>
-      <Router>
+    <Router>
+    <ToastContainer
+          position="bottom-center"
+          autoClose={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          theme="light"
+          // transition: Bounce,
+          />        
+      <Navbar/>      
+      <Routes>
+        <Route path="/" exact element={<Home />} />
+        <Route path="/about" exact element={<About />} />
+
+        {/* Secure the /workspace routes */}
+        <Route
+          path="/workspace/*"
+          element={
+            <PrivateRoute>
+              <Routes>
+                <Route path="" exact element={<Workspace />} />
+                <Route path="setup/rare_diseases" exact  element={<RareDiseases />} />
+                <Route path="setup/clinical_trials" exact  element={<ClinicalTrials />} />
+                <Route path="setup/medical_research" exact  element={<MedicalResearch />} />
+                <Route path="latest_developments" exact  element={<LatestDevelopments />} />
+                <Route path="bookmarks" exact  element={<Bookmarks />} />
+                <Route path="community" exact  element={<Community />} />
+                <Route path="companies" exact  element={<Companies />} />
+                <Route path="agencies/fda" exact  element={<Fda />} />
+                <Route path="agencies/ae" exact  element={<Ae />} />
+                <Route path="events"  exact element={<Events />} />
+                <Route path="contact"  exact element={<Contact />} />
+              </Routes>
+            </PrivateRoute>
+          }
+        />        
+        <Route path="/tabs/search-workspace/*" 
+          element={
+            <PrivateRoute>
+              <Routes>
+                <Route path="" exact element={<SearchWorkspace />} />
+              </Routes>
+            </PrivateRoute>                            
+          } 
+        />        
+        <Route path="/signin" exact element={<Login open={false}/>} />
+      </Routes>
+    </Router>
+
+      {/* <Router>
         <ToastContainer
           position="bottom-center"
           autoClose={false}
@@ -102,28 +155,30 @@ function App() {
           // transition: Bounce,
           />        
         <Navbar/>
-        <Routes>
-          <Route path='/' exact element={<Home/>}/>
-          <Route path='/about' exact element={<About/>}/>
-          <Route path='/workspace' exact element={<Workspace/>}/>
+        <PrivateRoute>
+          <Routes>
+            <Route path='/' exact element={<Home/>}/>
+            <Route path='/about' exact element={<About/>}/>
+            <Route path='/workspace' exact element={<Workspace/>}/>
 
-          <Route path='/workspace/setup/rare_diseases' exact element={<RareDiseases/>}/>
-          <Route path='/workspace/setup/clinical_trials' exact element={<ClinicalTrials/>}/>
-          <Route path='/workspace/setup/medical_research' exact element={<MedicalResearch/>}/>
-          <Route path='/workspace/latest_developments' exact element={<LatestDevelopments/>}/>
-          <Route path='/workspace/bookmarks' exact element={<Bookmarks/>}/>
-          <Route path='/workspace/community' exact element={<Community/>}/>
-          <Route path='/workspace/companies' exact element={<Companies/>}/>
-          <Route path='/workspace/agencies/fda' exact element={<Fda/>}/>
-          <Route path='/workspace/agencies/ae' exact element={<Ae/>}/>
-          <Route path='/workspace/events' exact element={<Events/>}/>
-          <Route path='/workspace/contact' exact element={<Contact/>}/>
+            <Route path='/workspace/setup/rare_diseases' exact element={<RareDiseases/>}/>
+            <Route path='/workspace/setup/clinical_trials' exact element={<ClinicalTrials/>}/>
+            <Route path='/workspace/setup/medical_research' exact element={<MedicalResearch/>}/>
+            <Route path='/workspace/latest_developments' exact element={<LatestDevelopments/>}/>
+            <Route path='/workspace/bookmarks' exact element={<Bookmarks/>}/>
+            <Route path='/workspace/community' exact element={<Community/>}/>
+            <Route path='/workspace/companies' exact element={<Companies/>}/>
+            <Route path='/workspace/agencies/fda' exact element={<Fda/>}/>
+            <Route path='/workspace/agencies/ae' exact element={<Ae/>}/>
+            <Route path='/workspace/events' exact element={<Events/>}/>
+            <Route path='/workspace/contact' exact element={<Contact/>}/>
 
-          <Route path='/tabs/search-workspace' exact element={<SearchWorkspace/>}/>
+            <Route path='/tabs/search-workspace' exact element={<SearchWorkspace/>}/>
 
-          <Route path='/signin' exact element={<Login/>}/>
-        </Routes>
-      </Router>
+            <Route path='/signin' exact element={<Login/>}/>
+          </Routes>
+        </PrivateRoute>        
+      </Router> */}
     </>    
   );
 }
