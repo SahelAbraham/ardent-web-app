@@ -29,7 +29,8 @@ import Contact from './components/workspace/contact/Contact'
 
 const CustomToastWithLink = () => (
   <div style={{textAlign:"center"}}>    
-    <Link to="https://ai.google.dev/competition/projects/ardent" target="_blank">Vote for ARDENT in Gemini API Competition</Link>
+    {/* <Link to="https://ai.google.dev/competition/projects/ardent" target="_blank">Vote for ARDENT in Gemini API Competition</Link> */}
+    <p>Subscribe to ARDENT to be informed about Rare Diseases.</p>
   </div>
 );
 
