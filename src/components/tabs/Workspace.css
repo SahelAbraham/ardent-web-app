@@ -9,6 +9,6 @@
 
 .flex-workspace-child-right {  
   /* width: calc(100% - 240px); */
-  flex: 1 1 auto;
+  flex: 1 1 auto;  
   /* background-color: red; */
 } 
