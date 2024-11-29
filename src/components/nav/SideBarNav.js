@@ -9,7 +9,8 @@ import {React, useState, useEffect} from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { IoVolumeHigh } from "react-icons/io5";
 import SpeakerIcon from '@rsuite/icons/Speaker';
-import SendIcon from '@rsuite/icons/Send';
+import Block from '@rsuite/icons/Block';
+import Tools from '@rsuite/icons/Tools';
 import PeopleBranchIcon from '@rsuite/icons/PeopleBranch';
 import WechatOutlineIcon from '@rsuite/icons/WechatOutline';
 import PeoplesIcon from '@rsuite/icons/Peoples';
@@ -24,17 +25,20 @@ export default function SideBarNav(){
   return (
     // <div style={{ width: 300 }}>
     <div className='sidebar-sidenav'>
-      <Sidenav expanded={expanded} defaultOpenKeys={['2', '7']}>
+      <Sidenav expanded={expanded} defaultOpenKeys={['7']}>
         <Sidenav.Body>
           <Nav activeKey={activeKey} onSelect={setActiveKey}>
             <Nav.Item as={Link} to="/tabs/search-workspace" eventKey="1" icon={<PlayOutlineIcon />}>
               Simple Workspace
             </Nav.Item>
-            <Nav.Menu placement="rightStart" eventKey="2" title="Setup" icon={<MagicIcon />}>
-              <Nav.Item as={Link} to="/workspace/setup/rare_diseases" eventKey="2-1">Rare Diseases</Nav.Item>
+            <Nav.Item as={Link} to="/workspace/setup" eventKey="2" icon={<Tools />}>
+              Setup
+            </Nav.Item>            
+            {/* <Nav.Menu placement="rightStart" eventKey="2" title="Setup" icon={<MagicIcon />}> */}
+              {/* <Nav.Item as={Link} to="/workspace/setup/rare_diseases" eventKey="2-1">Rare Diseases</Nav.Item>
               <Nav.Item as={Link} to="/workspace/setup/clinical_trials" eventKey="2-2">Clinical Trials</Nav.Item>
-              <Nav.Item as={Link} to="/workspace/setup/medical_research" eventKey="2-3">Medical Research</Nav.Item>
-            </Nav.Menu>            
+              <Nav.Item as={Link} to="/workspace/setup/medical_research" eventKey="2-3">Medical Research</Nav.Item> */}
+            {/* </Nav.Menu>             */}
             <Nav.Item as={Link} to="/workspace/latest_developments" eventKey="3" icon={<SpeakerIcon />}>
               Latest Developments
             </Nav.Item>
@@ -54,12 +58,15 @@ export default function SideBarNav(){
               icon={<GlobalIcon />}
             >
               <Nav.Item as={Link} to="/workspace/agencies/fda" eventKey="7-1">FDA</Nav.Item>
-              <Nav.Item as={Link} to="/workspace/agencies/ae" eventKey="7-2">Adverse Events</Nav.Item>
+              <Nav.Item as={Link} to="/workspace/agencies/nih" eventKey="7-2">NIH</Nav.Item>
             </Nav.Menu>
-            <Nav.Item as={Link} to="/workspace/events" eventKey="8" icon={<PeopleBranchIcon />}>
+            <Nav.Item as={Link} to="/workspace/ae" eventKey="8" icon={<Block />}>
+              Adverse Events
+            </Nav.Item>            
+            <Nav.Item as={Link} to="/workspace/events" eventKey="9" icon={<PeopleBranchIcon />}>
               Events
             </Nav.Item>
-            <Nav.Item as={Link} to="/workspace/contact" eventKey="9" icon={<WechatOutlineIcon />}>
+            <Nav.Item as={Link} to="/workspace/contact" eventKey="10" icon={<WechatOutlineIcon />}>
               Get in Touch
             </Nav.Item>            
           </Nav>

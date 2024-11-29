@@ -15,6 +15,7 @@ import processed_mock_resp from './mockData/ctgardlist.json'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Link } from "react-router-dom";
+import UserConfig from './components/workspace/setup/user_config';
 import RareDiseases from './components/workspace/setup/rare_diseases/RareDiseases'
 import ClinicalTrials from './components/workspace/setup/clinical_trials/ClinicalTrials'
 import MedicalResearch from './components/workspace/setup/medical_research/MedicalResearch'
@@ -23,7 +24,8 @@ import Bookmarks  from './components/workspace/bookmarks/Bookmarks'
 import Community from './components/workspace/community/Community'
 import Companies from './components/workspace/companies/Companies'
 import Fda from './components/workspace/agencies/fda/Fda'
-import Ae from './components/workspace/agencies/ae/Ae'
+import Ae from './components/workspace/ae/Ae'
+import Nih from './components/workspace/agencies/nih/Nih'
 import Events from './components/workspace/events/Events'
 import Contact from './components/workspace/contact/Contact'
 import PrivateRoute from './components/login/PrivateRoute'; // Import the PrivateRoute
@@ -114,15 +116,18 @@ function App() {
             <PrivateRoute>
               <Routes>
                 <Route path="" exact element={<Workspace />} />
-                <Route path="setup/rare_diseases" exact  element={<RareDiseases />} />
+                
+                <Route path="setup" exact  element={<UserConfig />} />
+                {/* <Route path="setup/rare_diseases" exact  element={<RareDiseases />} />
                 <Route path="setup/clinical_trials" exact  element={<ClinicalTrials />} />
-                <Route path="setup/medical_research" exact  element={<MedicalResearch />} />
+                <Route path="setup/medical_research" exact  element={<MedicalResearch />} /> */}
                 <Route path="latest_developments" exact  element={<LatestDevelopments />} />
                 <Route path="bookmarks" exact  element={<Bookmarks />} />
                 <Route path="community" exact  element={<Community />} />
                 <Route path="companies" exact  element={<Companies />} />
                 <Route path="agencies/fda" exact  element={<Fda />} />
-                <Route path="agencies/ae" exact  element={<Ae />} />
+                <Route path="agencies/nih" exact  element={<Nih />} />
+                <Route path="ae" exact  element={<Ae />} />
                 <Route path="events"  exact element={<Events />} />
                 <Route path="contact"  exact element={<Contact />} />
               </Routes>
