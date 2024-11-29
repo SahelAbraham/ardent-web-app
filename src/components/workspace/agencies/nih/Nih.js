@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import SideBarNav from '../../../nav/SideBarNav.js'
 import '../../Workspace-Component.css'
 
-export default function AdverseEvents(){
+export default function Nih(){
   
   return (
     <div className="flex-container">
@@ -11,7 +11,7 @@ export default function AdverseEvents(){
         <SideBarNav/>
       </div>
       <div className="flex-child-right">
-        <div>AE</div>  
+        <div>NIH</div>  
       </div>
     </div>    
     );
