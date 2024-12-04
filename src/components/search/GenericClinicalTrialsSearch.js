@@ -93,7 +93,9 @@ function GenericClinicalTrialsSearch({timelineData, timelineNodeIconArray}){
                     query: resolvedQuestion,
                     llm: "string",
                     trialRecruitingStatus : "RECRUITING",
-                    maxTrials : 1000
+                    maxTrials : 1000,
+                    clinical_trials_list: []
+
                 }
                 const headers = {
                     "Content-Type": "application/json",
