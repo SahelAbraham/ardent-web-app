@@ -114,7 +114,7 @@ function App() {
             // <PrivateRoute>
               <Routes>
                 <Route path="" exact element={<Workspace />} />
-                <Route path="setup/rare_diseases" exact  element={<RareDiseases />} />
+                {/* <Route path="setup/rare_diseases" exact  element={<RareDiseases />} />
                 <Route path="setup/clinical_trials" exact  element={<ClinicalTrials />} />
                 <Route path="setup/medical_research" exact  element={<MedicalResearch />} />
                 <Route path="latest_developments" exact  element={<LatestDevelopments />} />
@@ -124,7 +124,7 @@ function App() {
                 <Route path="agencies/fda" exact  element={<Fda />} />
                 <Route path="agencies/ae" exact  element={<Ae />} />
                 <Route path="events"  exact element={<Events />} />
-                <Route path="contact"  exact element={<Contact />} />
+                <Route path="contact"  exact element={<Contact />} /> */}
               </Routes>
             // </PrivateRoute>
           }
