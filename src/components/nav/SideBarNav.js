@@ -30,7 +30,7 @@ export default function SideBarNav(){
             <Nav.Item as={Link} to="/tabs/search-workspace" eventKey="1" icon={<PlayOutlineIcon />}>
               Simple Workspace
             </Nav.Item>
-            <Nav.Menu placement="rightStart" eventKey="2" title="Setup" icon={<MagicIcon />}>
+            {/* <Nav.Menu placement="rightStart" eventKey="2" title="Setup" icon={<MagicIcon />}>
               <Nav.Item as={Link} to="/workspace/setup/rare_diseases" eventKey="2-1">Rare Diseases</Nav.Item>
               <Nav.Item as={Link} to="/workspace/setup/clinical_trials" eventKey="2-2">Clinical Trials</Nav.Item>
               <Nav.Item as={Link} to="/workspace/setup/medical_research" eventKey="2-3">Medical Research</Nav.Item>
@@ -61,7 +61,7 @@ export default function SideBarNav(){
             </Nav.Item>
             <Nav.Item as={Link} to="/workspace/contact" eventKey="9" icon={<WechatOutlineIcon />}>
               Get in Touch
-            </Nav.Item>            
+            </Nav.Item>             */}
           </Nav>
         </Sidenav.Body>
         <Sidenav.Toggle onToggle={expanded => setExpanded(expanded)} />
