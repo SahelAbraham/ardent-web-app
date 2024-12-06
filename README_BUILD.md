@@ -9,3 +9,11 @@ gcloud builds submit --impersonate-service-account="ardent-service-account@arden
 
 #Push docker artifact
 gcloud builds submit --tag us-central1-docker.pkg.dev/ardent-427704/ardent-webapp-repository
+
+-----------------------------------------------------
+
+Cloud build steps
+1. Make sure that .env is not in .gitignore file - otherwise, it doesn't seem to get picked up in cloudbuild
+2. Make sure you're in C:\Dev\Ardent-web-app directory
+3. #Push articact
+gcloud builds submit
