@@ -111,7 +111,7 @@ function App() {
         <Route
           path="/workspace/*"
           element={
-            <PrivateRoute>
+            // <PrivateRoute>
               <Routes>
                 <Route path="" exact element={<Workspace />} />
                 <Route path="setup/rare_diseases" exact  element={<RareDiseases />} />
@@ -126,16 +126,16 @@ function App() {
                 <Route path="events"  exact element={<Events />} />
                 <Route path="contact"  exact element={<Contact />} />
               </Routes>
-            </PrivateRoute>
+            // </PrivateRoute>
           }
         />        
         <Route path="/tabs/search-workspace/*" 
           element={
-            <PrivateRoute>
+            // <PrivateRoute>
               <Routes>
                 <Route path="" exact element={<SearchWorkspace />} />
               </Routes>
-            </PrivateRoute>                            
+            // </PrivateRoute>                            
           } 
         />        
         <Route path="/signin" exact element={<Login open={false}/>} />
