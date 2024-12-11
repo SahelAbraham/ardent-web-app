@@ -1,0 +1,12 @@
+.sidebar-sidenav {
+	height: 100vh;    
+    /* float: left;
+    position: relative; */
+}
+
+.sidebar-sidenav .open {
+    width: 240px;
+}
+.sidebar-sidenav .closed {
+    width: 50px;
+}

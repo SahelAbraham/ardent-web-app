@@ -14,13 +14,13 @@ export const SearchClinicalTrialsResultsSlice = createSlice({
   initialState,
   reducers: {
     addClinicalTrialSearchResult: (state, action) => {
-      state.clinicalTrialSearchResults.items = [...state.clinicalTrialSearchResults.items, action.payload];
+      state.clinicalTrialSearchResults.items = state.clinicalTrialSearchResults.items.concat(action.payload);
     },
     resetClinicalTrialSearchResult: (state, action) => {
       state.clinicalTrialSearchResults.items = [];
     },
     addClinicalTrialDetails: (state, action) => {
-      state.clinicalTrialDetails.items = [...state.clinicalTrialDetails.items, action.payload];
+      state.clinicalTrialDetails.items = state.clinicalTrialDetails.items.concat(action.payload);
     },
     resetClinicalTrialDetails: (state, action) => {
       state.clinicalTrialDetails.items = [];

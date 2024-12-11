@@ -11,12 +11,12 @@ import { setNotifcation, resetNotification } from "../../reducer/NotificationRed
 import { app } from '../../firebase/firebase';
 import './Login.css'
 
-function Login() {
+function Login(props) {
     const [isMobile] = useMediaQuery('(max-width: 700px)');
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false); 
     const [isLoading, setIsLoading] = useState(false);
-    const [open, setOpen] = React.useState(false);
+    const [open, setOpen] = useState(props.open);
     const dispatch = useDispatch()
 
     // Sign In

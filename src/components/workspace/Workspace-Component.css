@@ -1,5 +1,6 @@
 .flex-container {
   display: flex;
+  align-items: flex-start;
 }
 
 .flex-child-left {
@@ -10,5 +11,6 @@
 .flex-child-right {
   flex: 1 0;  
   width:100%;
+  vertical-align: top;
   flex-grow: 1;
 }  

@@ -128,10 +128,10 @@ export default function SearchWorkspace() {
         <Header></Header>
         <Container>
           <div className="flex-workspace-container">
-            <div className="flex-workspace-child-left">
+            {/* <div className="flex-workspace-child-left"> */}
               <SideBarNav/>
-            </div>
-            <div className="flex-workspace-child-right">
+            {/* </div> */}
+            {/* <div className="flex-workspace-child-right"> */}
               <Content>
                 <div>
                   <div className='generic-search-container-description'>
@@ -176,20 +176,23 @@ export default function SearchWorkspace() {
                                     {value.answer.map((mapValue, mapKey) => (                                      
                                       Object.keys(mapValue).length > 0 && mapValue !== null ?
                                         Object.values(mapValue).map((entry, entryIdx) => (
-                                          <Accordion.Panel defaultExpanded header={`NCT ID: ${entry.nct_id} - ${entry.brief_title}`} key={entryIdx} caretAs={FaArrowDown}>
+                                          <Accordion.Panel header={`NCT ID: ${entry.nct_id} - ${entry.brief_title}`} key={entryIdx} caretAs={FaArrowDown} defaultExpanded={true}>
                                             <p>{`Study Title: ${entry.official_title}`}</p>                                
-                                            {clinicalTrialsDetailsFlag.indexOf(entry.nct_id) > -1 ? 
-                                              <Panel header={`Details for ${entry.nct_id}`} shaded>
-                                                  <p>Trial phase : {(Object.keys(searchCTDetailsDisplay).length <= 1) ? "Data not available" : (entry.nct_id !== searchCTDetailsDisplay["details"]["clinical_trial_studies_info"]["nct_id"] ? "Data not available" : searchCTDetailsDisplay["details"]["clinical_trial_studies_info"]["phase"])}</p>
-                                                  <p>Trial study type : {(Object.keys(searchCTDetailsDisplay).length <= 1) ? "Data not available" : (entry.nct_id !== searchCTDetailsDisplay["details"]["clinical_trial_studies_info"]["nct_id"] ? "Data not available" :  searchCTDetailsDisplay["details"]["clinical_trial_studies_info"]["study_type"])}</p>
-                                                  <p>Trial sponsor/lead : {(Object.keys(searchCTDetailsDisplay).length <= 1) ? "Data not available" : (entry.nct_id !== searchCTDetailsDisplay["details"]["clinical_trial_studies_sponsors"]["nct_id"] ? "Data not available" : searchCTDetailsDisplay["details"]["clinical_trial_studies_sponsors"]["name"])}</p>
-                                                  <p>Trial status : {(Object.keys(searchCTDetailsDisplay).length <= 1) ? "Data not available" : (entry.nct_id !== searchCTDetailsDisplay["details"]["clinical_trial_studies_info"]["nct_id"] ? "Data not available" : searchCTDetailsDisplay["details"]["clinical_trial_studies_info"]["overall_status"])}</p>
-                                                  <p>Trial enrollment : {(Object.keys(searchCTDetailsDisplay).length <= 1) ? "Data not available" : (entry.nct_id !== searchCTDetailsDisplay["details"]["clinical_trial_studies_info"]["nct_id"] ? "Data not available" : searchCTDetailsDisplay["details"]["clinical_trial_studies_info"]["enrollment"])}</p>
-                                                  <p>Trial start date: {(Object.keys(searchCTDetailsDisplay).length <= 1) ? "Data not available" : (entry.nct_id !== searchCTDetailsDisplay["details"]["clinical_trial_studies_info"]["nct_id"] ? "Data not available" : new Date(searchCTDetailsDisplay["details"]["clinical_trial_studies_info"]["created_at"]).toLocaleDateString('en-US'))}</p>
-                                                  <p>Trial completion date (expected/estimated): {(Object.keys(searchCTDetailsDisplay).length <= 1) ? "Data not available" : (entry.nct_id !== searchCTDetailsDisplay["details"]["clinical_trial_studies_info"]["nct_id"] ? "Data not available" : new Date(searchCTDetailsDisplay["details"]["clinical_trial_studies_info"]["completion_date"]).toLocaleDateString('en-US'))}</p>
-                                                </Panel> :
-                                                ctDetailsLoading ? <Button appearance="ghost" loading>Get more details</Button> : <Button appearance="ghost" onClick={() => fetchCTDetailsByNCT(entry.nct_id)}>Get more details</Button>
-                                            }
+                                            {clinicalTrialsDetailsFlag.indexOf(entry.nct_id) > -1 & searchCTDetailsResultsDisplay.length>0 ? 
+                                              searchCTDetailsResultsDisplay.map(element => {
+                                                 return (element["nct_id"]===entry.nct_id) ? 
+                                                   <Panel header={`Details for ${entry.nct_id}`} shaded>
+                                                    <p>Trial phase : {(Object.keys(clinicalTrialsDetailsFlag).length < 0) ? "Data not available" : (entry.nct_id !== element["nct_id"] ? "Data not available" : element["details"]["clinical_trial_studies_info"]["phase"])}</p>
+                                                    <p>Trial study type : {(Object.keys(clinicalTrialsDetailsFlag).length < 0) ? "Data not available" : (entry.nct_id !== element["details"]["clinical_trial_studies_info"]["nct_id"] ? "Data not available" :  element["details"]["clinical_trial_studies_info"]["study_type"])}</p>
+                                                    <p>Trial sponsor/lead : {(Object.keys(clinicalTrialsDetailsFlag).length < 0) ? "Data not available" : (entry.nct_id !== element["details"]["clinical_trial_studies_sponsors"]["nct_id"] ? "Data not available" : element["details"]["clinical_trial_studies_sponsors"]["name"])}</p>
+                                                    <p>Trial status : {(Object.keys(clinicalTrialsDetailsFlag).length < 0) ? "Data not available" : (entry.nct_id !== element["details"]["clinical_trial_studies_info"]["nct_id"] ? "Data not available" : element["details"]["clinical_trial_studies_info"]["overall_status"])}</p>
+                                                    <p>Trial enrollment : {(Object.keys(clinicalTrialsDetailsFlag).length < 0) ? "Data not available" : (entry.nct_id !== element["details"]["clinical_trial_studies_info"]["nct_id"] ? "Data not available" : element["details"]["clinical_trial_studies_info"]["enrollment"])}</p>
+                                                    <p>Trial start date: {(Object.keys(clinicalTrialsDetailsFlag).length < 0) ? "Data not available" : (entry.nct_id !== element["details"]["clinical_trial_studies_info"]["nct_id"] ? "Data not available" : new Date(element["details"]["clinical_trial_studies_info"]["created_at"]).toLocaleDateString('en-US'))}</p>
+                                                    <p>Trial completion date (expected/estimated): {(Object.keys(clinicalTrialsDetailsFlag).length < 0) ? "Data not available" : (entry.nct_id !== element["details"]["clinical_trial_studies_info"]["nct_id"] ? "Data not available" : new Date(element["details"]["clinical_trial_studies_info"]["completion_date"]).toLocaleDateString('en-US'))}</p>
+                                                  </Panel> : ''
+                                                }) :
+                                                ctDetailsLoading ? <Button appearance="ghost" loading>Get more details</Button> : <Button appearance="ghost" onClick={() => fetchCTDetailsByNCT(entry.nct_id)}>Get more details</Button>                                                
+                                              }
                                           </Accordion.Panel>)) : <p>No trials found</p>)
                                     )} 
                                   </Accordion.Panel>
@@ -202,7 +205,7 @@ export default function SearchWorkspace() {
                   </div>
                 </div>
               </Content>
-            </div>            
+            {/* </div>             */}
           </div>
           {/* <Sidebar>
             <div className='workspace'>

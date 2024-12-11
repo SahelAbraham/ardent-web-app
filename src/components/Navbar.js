@@ -60,7 +60,7 @@ function Navbar() {
               </li>                            
               <li className='nav-item'>
                 <div className='nav-links'>
-                  <Login/>
+                  <Login open={false}/>
                 </div>                
               </li> 
               {/* <li className='nav-item'>

@@ -7,10 +7,10 @@ export default function Workspace(){
   
   return (
     <div className="flex-container">
-      <div className="flex-child magenta">
+      <div className="flex-workspace-child-left">
         <SideBarNav/>
       </div>
-      <div className="flex-child green">
+      <div className="flex-workspace-child-right">
         <div>Test</div>  
       </div>
     </div>    
