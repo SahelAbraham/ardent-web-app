@@ -10,6 +10,7 @@ import UserBookmarksReducer from '../reducer/UserBookmarksReducer'
 import UserCommunityReducer from '../reducer/UserCommunityReducer'
 import UserEventsReducer from '../reducer/UserEventsReducer'
 import UserLatestDevelopmentsReducer from '../reducer/UserLatestDevelopmentsReducer'
+import UserWishlistReducer from '../reducer/UserWishlistReducer'
 import SearchClinicalTrialsReducer from '../reducer/SearchClinicalTrialsReducer'
 
 // const reducer = combineReducers({
@@ -23,7 +24,8 @@ const reducer = combineReducers({
   gardDiseases : GARDReducer,
   searchClinicalTrials : SearchClinicalTrialsReducer,
   userState : UserStateReducer,
-
+  userWishlist : UserWishlistReducer,
+  
   userAE : UserAEReducer,
   userAgency : UserAgencyReducer,
   userBookmarks : UserBookmarksReducer,

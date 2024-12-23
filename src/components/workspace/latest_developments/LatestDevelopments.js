@@ -4,14 +4,13 @@ import SideBarNav from '../../nav/SideBarNav.js'
 import '../Workspace-Component.css'
 
 export default function LatestDevelopments(){
-  
   return (
     <div className="flex-container">
       <div className="flex-child-left">
         <SideBarNav/>
       </div>
       <div className="flex-child-right">
-        <div>L:atest Developments</div>  
+        <div>Latest Developments</div>  
       </div>
     </div>    
     );

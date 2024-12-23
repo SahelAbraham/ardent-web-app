@@ -20,6 +20,7 @@ import RareDiseases from './components/workspace/setup/rare_diseases/RareDisease
 import ClinicalTrials from './components/workspace/setup/clinical_trials/ClinicalTrials'
 import MedicalResearch from './components/workspace/setup/medical_research/MedicalResearch'
 import LatestDevelopments from './components/workspace/latest_developments/LatestDevelopments'
+import Wishlist from './components/workspace/wishlist/Wishlist';
 import Bookmarks  from './components/workspace/bookmarks/Bookmarks'
 import Community from './components/workspace/community/Community'
 import Companies from './components/workspace/companies/Companies'
@@ -122,6 +123,7 @@ function App() {
                 <Route path="setup/clinical_trials" exact  element={<ClinicalTrials />} />
                 <Route path="setup/medical_research" exact  element={<MedicalResearch />} /> */}
                 <Route path="latest_developments" exact  element={<LatestDevelopments />} />
+                <Route path="wishlist" exact element={<Wishlist/>}/>
                 <Route path="bookmarks" exact  element={<Bookmarks />} />
                 <Route path="community" exact  element={<Community />} />
                 <Route path="companies" exact  element={<Companies />} />
@@ -170,6 +172,7 @@ function App() {
             <Route path='/workspace/setup/clinical_trials' exact element={<ClinicalTrials/>}/>
             <Route path='/workspace/setup/medical_research' exact element={<MedicalResearch/>}/>
             <Route path='/workspace/latest_developments' exact element={<LatestDevelopments/>}/>
+            <Route path='/workspace/wishlist' exact element={<Wishlist/>}/>
             <Route path='/workspace/bookmarks' exact element={<Bookmarks/>}/>
             <Route path='/workspace/community' exact element={<Community/>}/>
             <Route path='/workspace/companies' exact element={<Companies/>}/>

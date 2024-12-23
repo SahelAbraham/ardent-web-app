@@ -22,10 +22,12 @@ import './SideBarNav.css'
 export default function SideBarNav(){
   const [expanded, setExpanded] = useState(true);
   const [activeKey, setActiveKey] = useState('1');
+  const [featureFlag, setFeatureFlag] = useState(false)
+
   return (
     // <div style={{ width: 300 }}>
     <div className='sidebar-sidenav'>
-      <Sidenav expanded={expanded} defaultOpenKeys={['7']}>
+      <Sidenav expanded={expanded} defaultOpenKeys={['8']}>
         <Sidenav.Body>
           <Nav activeKey={activeKey} onSelect={setActiveKey}>
             <Nav.Item as={Link} to="/tabs/search-workspace" eventKey="1" icon={<PlayOutlineIcon />}>
@@ -39,34 +41,41 @@ export default function SideBarNav(){
               <Nav.Item as={Link} to="/workspace/setup/clinical_trials" eventKey="2-2">Clinical Trials</Nav.Item>
               <Nav.Item as={Link} to="/workspace/setup/medical_research" eventKey="2-3">Medical Research</Nav.Item> */}
             {/* </Nav.Menu>             */}
-            <Nav.Item as={Link} to="/workspace/latest_developments" eventKey="3" icon={<SpeakerIcon />}>
-              Latest Developments
-            </Nav.Item>
-            <Nav.Item as={Link} to="/workspace/bookmarks" eventKey="4" icon={<TagIcon />}>
-              Bookmarks
-            </Nav.Item>            
-            <Nav.Item as={Link} to="/workspace/community" eventKey="5" icon={<PeoplesIcon />}>
-              Community
-            </Nav.Item>
-            <Nav.Item as={Link} to="/workspace/companies" eventKey="6" icon={<PeoplesIcon />}>
-              Companies
-            </Nav.Item>            
-            <Nav.Menu
-              placement="leftStart"
-              eventKey="7"
-              title="Agencies"
-              icon={<GlobalIcon />}
-            >
-              <Nav.Item as={Link} to="/workspace/agencies/fda" eventKey="7-1">FDA</Nav.Item>
-              <Nav.Item as={Link} to="/workspace/agencies/nih" eventKey="7-2">NIH</Nav.Item>
-            </Nav.Menu>
-            <Nav.Item as={Link} to="/workspace/ae" eventKey="8" icon={<Block />}>
-              Adverse Events
-            </Nav.Item>            
-            <Nav.Item as={Link} to="/workspace/events" eventKey="9" icon={<PeopleBranchIcon />}>
-              Events
-            </Nav.Item>
-            <Nav.Item as={Link} to="/workspace/contact" eventKey="10" icon={<WechatOutlineIcon />}>
+            <Nav.Item as={Link} to="/workspace/wishlist" eventKey="4" icon={<MagicIcon />}>
+              Wishlist
+            </Nav.Item>  
+            {featureFlag ?
+            <div>
+              <Nav.Item as={Link} to="/workspace/latest_developments" eventKey="3" icon={<SpeakerIcon />}>
+                Latest Developments
+              </Nav.Item>
+              <Nav.Item as={Link} to="/workspace/bookmarks" eventKey="5" icon={<TagIcon />}>
+                Bookmarks
+              </Nav.Item>            
+              <Nav.Item as={Link} to="/workspace/community" eventKey="6" icon={<PeoplesIcon />}>
+                Community
+              </Nav.Item>
+              <Nav.Item as={Link} to="/workspace/companies" eventKey="7" icon={<PeoplesIcon />}>
+                Companies
+              </Nav.Item>            
+              <Nav.Menu
+                placement="leftStart"
+                eventKey="8"
+                title="Agencies"
+                icon={<GlobalIcon />}
+              >
+                <Nav.Item as={Link} to="/workspace/agencies/fda" eventKey="8-1">FDA</Nav.Item>
+                <Nav.Item as={Link} to="/workspace/agencies/nih" eventKey="8-2">NIH</Nav.Item>
+              </Nav.Menu>
+              <Nav.Item as={Link} to="/workspace/ae" eventKey="9" icon={<Block />}>
+                Adverse Events
+              </Nav.Item>            
+              <Nav.Item as={Link} to="/workspace/events" eventKey="10" icon={<PeopleBranchIcon />}>
+                Events
+              </Nav.Item>
+            </div>
+            : ''}        
+            <Nav.Item as={Link} to="/workspace/contact" eventKey="11" icon={<WechatOutlineIcon />}>
               Get in Touch
             </Nav.Item>            
           </Nav>

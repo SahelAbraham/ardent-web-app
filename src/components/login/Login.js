@@ -1,15 +1,17 @@
 import '../../App.css'
 import { useMediaQuery, Stack, Modal, Button, Loader, Panel, PanelGroup, FlexboxGrid, ButtonToolbar, Col, Form, Notification, useToaster } from 'rsuite';
 import React, {useEffect, useState} from 'react';
+import { useSelector, useDispatch } from 'react-redux'
 import { SchemaModel, StringType } from "schema-typed"
 // Import the functions you need from the SDKs you need
 // import { initializeApp } from "firebase/app";
 // import { getAnalytics } from "firebase/analytics";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, sendPasswordResetEmail } from "firebase/auth";
-import { useDispatch } from 'react-redux'
 import { setNotifcation, resetNotification } from "../../reducer/NotificationReducer"
+import { setUserConfiguration } from "../../reducer/UserStateReducer"
 import { app } from '../../firebase/firebase';
 import './Login.css'
+import axios from 'axios';
 
 function Login(props) {
     const [isMobile] = useMediaQuery('(max-width: 700px)');
@@ -18,6 +20,7 @@ function Login(props) {
     const [isLoading, setIsLoading] = useState(false);
     const [open, setOpen] = useState(props.open);
     const dispatch = useDispatch()
+    const ardentWebAppUrl = useSelector((state) => state.notification.initialization.ardent_web_app_url)
 
     // Sign In
     const [signInFormValue, setSignInFormValue] = React.useState({ 
@@ -64,6 +67,56 @@ function Login(props) {
         });
     }
 
+    const initUserConfiguration = (userName, userId) => {        
+        let ARDENT_WEB_APP_URL = ardentWebAppUrl!=='' ? ardentWebAppUrl : process.env.REACT_APP_ARDENT_WEB_APP_URL
+        const headers = {
+            "Content-Type": "application/json",
+        };
+
+        // create the user configuration object
+        let user_config_object = {
+            rare_disease_name_config :  [],
+            clinical_trial_id_config : [],
+            medical_research_config : [],
+            user_name : userName,
+            user_id : userId
+        }
+
+        axios.post(ARDENT_WEB_APP_URL + '/config/user', user_config_object, {headers})
+        .then(response => {
+            console.log(response.data);
+            if(parseInt(response.status)===200)
+                dispatch(setUserConfiguration(user_config_object))
+            else
+                dispatch(setUserConfiguration({}))            
+        })
+        .catch(error => {
+            console.log(error);
+        });
+
+    }
+
+    const retrieveUserConfiguration = (userName, userId) => {        
+        let ARDENT_WEB_APP_URL = ardentWebAppUrl!=='' ? ardentWebAppUrl : process.env.REACT_APP_ARDENT_WEB_APP_URL
+        const headers = {
+            "Content-Type": "application/json",
+        };
+
+        axios.get(ARDENT_WEB_APP_URL + '/config/user/' + userId, {headers})
+        .then(response => {
+            console.log(response.data);
+            if(parseInt(response.status)===200)
+                dispatch(setUserConfiguration(response))
+            else
+                dispatch(setUserConfiguration({}))            
+        })
+        .catch(error => {
+            console.log(error);
+        });
+
+    }
+
+    //SignIn options
     const signInUserWithEmail = (e) => {        
         if (!signInFormRef.current.check()) { 
             console.error("Form error") 
@@ -77,6 +130,8 @@ function Login(props) {
             const user = userCredential.user;
             setIsLoading(false)
             dispatch(setNotifcation({notifyFlag: "success", notifyMessage: "Successful login!!"}))
+            //Retrieve the user configuration from the mongodb
+            retrieveUserConfiguration(user.email, user.uid)
         })
         .catch((error) => {
             const errorCode = error.code;
@@ -112,6 +167,7 @@ function Login(props) {
             .isRequired("Enter password") 
     });
     
+    //SignUp options
     const signUpUserWithEmail = (e) => {
         setIsLoading(true)
         if (!signUpFormRef.current.check()) { 
@@ -124,6 +180,17 @@ function Login(props) {
             // Signed up 
             const user = userCredential.user;
             setIsLoading(false)
+
+            //create default user registration object in mongo
+            // create the user configuration object
+            let user_config_object = {
+                rare_disease_name_config :  [],
+                clinical_trial_id_config : [],
+                medical_research_config : [],
+                user_name : user.email,
+                user_id : user.uid
+            }            
+            initUserConfiguration(user.email, user.uid)
             dispatch(setNotifcation({notifyFlag: "success", notifyMessage: "Successful registration!!"}))
         })
         .catch((error) => {
